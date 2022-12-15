@@ -13,7 +13,11 @@
         }
     </style>
     {# -- CSS -- #}
+    {% block messages %}{% endblock %}
+</head>
+    {# -- メッセージ -- #}
     {% block messages %}
         {% include "_message.html" %}
     {% endblock %}
-</head>
+
+    {# -- メインコンテンツ -- #}
