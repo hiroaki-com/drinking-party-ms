@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['*'] ## SECURITY WARNING: don't run with [*] turned on in produ
 
 
 # Application definition
-
+# 自作アプリを追加する場合、上書きの必要なければ、下へ追加する
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,3 +133,5 @@ MEDIA_ROOT = BASE_DIR / "media_local" # Todo:media_local を暫定的に指定
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# SecurityMiddleware：HTTPアクセスをHTTPSのURLへリダイレクトする
+# SECURE_SSL_REDIRECT = True
