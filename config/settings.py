@@ -130,7 +130,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SECURE_SSL_REDIRECT = True
 
 # django-allauth
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', #デフォルト
+    'allauth.account.auth_backends.AuthenticationBackend', #追加
+)
+
+#認証方式を 「メールアドレスとパスワード」 に変更
+ACCOUNT_AUTHENTICATION_METHOD = 'email'  #ユーザー名は使用しない
+ACCOUNT_USERNAME_REQUIRED = False  #ユーザー登録確認メールは送信しない
+ACCOUNT_EMAIL_VERIFICATION = 'none'  #メールアドレスを必須項目にする
+ACCOUNT_EMAIL_REQUIRED = True
+
 SITE_ID = 1
-## TODO: 以下、認証機能のURL構成が決定した際に編集
 LOGIN_REDIRECT_URL = 'index'
-# ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
