@@ -10,4 +10,4 @@ from .forms import SignupForm
 class SignupView(CreateView):
     form_class = SignupForm
     success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
+    template_name = 'signup.html'
