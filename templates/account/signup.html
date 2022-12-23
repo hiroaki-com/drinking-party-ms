@@ -3,10 +3,10 @@
 {% block title %}ユーザー登録{% endblock%}
 
 {% block content%}
-<h2>ユーザー登録</h2>
+<h3 class="mb-5">ユーザー登録</h3>
 <form method="post">
     {% csrf_token%}
     {{form.as_p}}
-    <button type="submit">ユーザー登録</button>
+    <button class="btn btn-primary btn-sm mt-3" type="submit">ユーザー登録</button>
 </form>
 {% endblock%}
