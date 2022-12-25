@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'accounts.apps.AccountsConfig',
     'django_bootstrap5',
+    'party.apps.PartyConfig',
 ]
 
 MIDDLEWARE = [
