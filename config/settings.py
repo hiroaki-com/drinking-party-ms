@@ -131,6 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SecurityMiddleware：HTTPアクセスをHTTPSのURLへリダイレクトする
 # SECURE_SSL_REDIRECT = True
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 # django-allauth
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', #デフォルト
@@ -138,11 +140,11 @@ AUTHENTICATION_BACKENDS = (
 )
 
 #認証方式を 「メールアドレスとパスワード」 に変更
-ACCOUNT_AUTHENTICATION_METHOD = 'email'  #ユーザー名は使用しない
-ACCOUNT_USERNAME_REQUIRED = False  #ユーザー登録確認メールは送信しない
-ACCOUNT_EMAIL_VERIFICATION = 'none'  #メールアドレスを必須項目にする
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'  #認証方式をメールアドレスにする
+ACCOUNT_USERNAME_REQUIRED = True  #登録時にユーザー名を必要とする
+ACCOUNT_EMAIL_REQUIRED = True  #メールアドレスを必須項目にする
+ACCOUNT_EMAIL_VERIFICATION = 'none'  #登録確認メールを送信しない
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
