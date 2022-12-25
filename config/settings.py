@@ -144,6 +144,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'  #認証方式をメールアドレス�
 ACCOUNT_USERNAME_REQUIRED = True  #登録時にユーザー名を必要とする
 ACCOUNT_EMAIL_REQUIRED = True  #メールアドレスを必須項目にする
 ACCOUNT_EMAIL_VERIFICATION = 'none'  #登録確認メールを送信しない
+ACCOUNT_LOGOUT_ON_GET = True #確認画面無しのログアウト
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
