@@ -5,8 +5,14 @@ from accounts.models import CustomUser
 
 class Party(models.Model):
 
-    party_name = models.CharField(
-        verbose_name='飲み会名'
+    user = models.ForeignKey(
+        CustomUser,
+        verbose_name='作成者',
+        on_delete=models.CASCADE
+    )
+    title = models.CharField(
+        verbose_name='飲み会名',
+        max_length=100,
     )
     date = models.DateField(
         verbose_name='予約日'
@@ -15,16 +21,19 @@ class Party(models.Model):
         verbose_name='時間'
     )
     restaurant = models.CharField(
-        verbose_name='店舗名'
+        verbose_name='店舗名',
+        max_length=100,
     )
-    address = models.Charfield(
-        verbose_name='場所'
+    address = models.CharField(
+        verbose_name='場所',
+        max_length=500,
     )
     url = models.URLField(
         verbose_name='店舗リンク'
     )
     subscriber = models.CharField(
-        verbose_name='予約者名'
+        verbose_name='予約者名',
+        max_length=100,
     )
     fee = models.PositiveIntegerField(
         verbose_name='会費'
@@ -39,5 +48,5 @@ class Party(models.Model):
         verbose_name='編集日時'
     )
 
-    def__str__(self):
-　　　　    return self.party_name
+    def __str__(self):
+        return self.title
