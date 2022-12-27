@@ -10,7 +10,7 @@ class Party(models.Model):
         CustomUser,
         verbose_name='作成者',
         on_delete=models.CASCADE,
-        default=CustomUser
+        default=CustomUser,
     )
     title = models.CharField(
         verbose_name='飲み会名',
