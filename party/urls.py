@@ -6,5 +6,6 @@ from . import views
 app_name = 'party'
 
 urlpatterns = [
-    path('', views.index_view, name='index'), #関数ベース
+    path('', views.IndexView.as_view(), name='index'),
+    path('create/', views.CreatePartyView.as_view(), name='create'),
 ]
