@@ -1,6 +1,10 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% comment %} {% extends 'base.html' %} {% endcomment %} <!-- TODO:継承するとフォーム画面が表示されなくなるため対応 -->
 
-{% comment %} {% block title %}飲み会作成{% endblock %} {% endcomment %}
+    <a class="navbar-brand" href="{% url 'party:index' %}">DRPT</a> <!-- TODO:作業用リンク -->
+    <br><br>
+
+{% block title %}DRPT CREATE{% endblock %}
+    
 
     {% block contents %}
     
@@ -8,54 +12,9 @@
     <div class="container">
     <div class="row">
     <div class="col offset-2">
-    <form method ="POST">
+    <form method="POST">
     {% csrf_token %}
-    <table>
-      <tr>
-        <th>飲み会名</th>
-        <td>{{ form.title }}</td>
-      </tr>
-      <tr>
-        <th>予約日</th>
-        <td>{{ form.date }}</td>
-      </tr>
-      <tr>
-        <th>時間</th>
-        <td>{{ form.time }}</td>
-      </tr>
-      <tr>
-        <th>店舗名</th>
-        <td>{{ form.restaurant }}</td>
-      </tr>
-      <tr>
-        <th>場所</th>
-        <td>{{ form.address }}</td>
-      </tr>
-      <tr>
-        <th>店舗リンク</th>
-        <td>{{ form.url }}</td>
-      </tr>
-      <tr>
-        <th>予約者名</th>
-        <td>{{ form.subscriber }}</td>
-      </tr>
-      <tr>
-        <th>会費</th>
-        <td>{{ form.fee }}</td>
-      </tr>
-      <tr>
-        <th>コメント</th>
-        <td>{{ form.comment }}</td>
-      </tr>
-      <tr>
-        <th>作成日時</th>
-        <td>{{ form.create_dt }}</td>
-      </tr>
-      <tr>
-        <th>編集日時</th>
-        <td>{{ form.mod_dt }}</td>
-      </tr>
-    </table>
+    {{ form.as_p }}
     <br>
     <button type="submit">作成する</button>
     </form>
