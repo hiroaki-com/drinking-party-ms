@@ -19,7 +19,7 @@ class CreatePartyView(CreateView):
     success_url = reverse_lazy('party:index')
 
     def form_valid(self, form):
-        create_data = form.save(commit=False)
+        create_data = form.save()
         create_data.user = self.request.user
         create_data.save()
         return super().form_valid(form)
