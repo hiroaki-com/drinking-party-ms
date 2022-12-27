@@ -24,7 +24,10 @@
 <body style="background-color:#ece8e0;">
 <nav class="navbar navbar-expand-md navbar-custom fixed-top mb-2 bg-warning">
   <div class="container-fluid">
-      <a class="navbar-brand" href="/">DRPT</a>
+      <a class="navbar-brand" href="{% url 'party:index' %}">DRPT</a>
+  </div>
+  <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'party:create' %}">CREATE</a>
   </div>
 </nav>
 <main class="container" >

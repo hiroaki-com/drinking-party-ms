@@ -1,0 +1,25 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %} <!-- TODO:継承するとフォーム画面が表示されなくなるため対応 -->
+
+    <a class="navbar-brand" href="{% url 'party:index' %}">DRPT</a> <!-- TODO:作業用リンク -->
+    <br><br>
+
+{% block title %}DRPT CREATE{% endblock %}
+    
+
+    {% block contents %}
+    
+    <br>
+    <div class="container">
+    <div class="row">
+    <div class="col offset-2">
+    <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <button type="submit">作成する</button>
+    </form>
+    </div>
+    </div>
+    </div>
+
+    {% endblock %}

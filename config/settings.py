@@ -147,5 +147,5 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'  #登録確認メールを送信しない
 ACCOUNT_LOGOUT_ON_GET = True #確認画面無しのログアウト
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'party:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'

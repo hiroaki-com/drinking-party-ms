@@ -42,10 +42,10 @@ class Party(models.Model):
         verbose_name='コメント'
     )
     create_dt = models.DateTimeField(
-        verbose_name='作成日時'
+        verbose_name='作成日時' #自動的にしたい場合 auto_now_add=True
     )
     mod_dt = models.DateTimeField(
-        verbose_name='編集日時'
+        verbose_name='編集日時' #自動的にしたい場合 auto_now=True
     )
 
     def __str__(self):

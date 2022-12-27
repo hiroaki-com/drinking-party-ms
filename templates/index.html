@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}ホーム{% endblock %}
+{% block title %}home{% endblock %}
 
 {% block content %}
-<h2 class=mb-5>ホーム</h2>
+<h2 class=mb-5>HOME</h2>
 {% if user.is_authenticated %}
 Welcome ! {{ user.get_username }} さん
 <p><a href="{% url 'account_logout' %}">ログアウト</a></p>
