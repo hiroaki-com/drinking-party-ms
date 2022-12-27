@@ -13,7 +13,7 @@ class IndexView(TemplateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class CreatePartyView(CreateView):
+class PartyCreateView(CreateView):
     form_class = PartyForm
     template_name = "party/create_party.html"
     success_url = reverse_lazy('party:index')
