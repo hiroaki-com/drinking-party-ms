@@ -6,7 +6,7 @@
 <h2 class=mb-5>HOME</h2>
 {% if user.is_authenticated %}
 Welcome ! {{ user.get_username }} さん
-<p><a href="{% url 'account_logout' %}">ログアウト</a></p>
+<p class=mt-5><a href="{% url 'account_logout' %}">ログアウト</a></p>
 {% else %}
 <p><a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">ログイン</a></p>
 {% endif %}
