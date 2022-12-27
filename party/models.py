@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 from accounts.models import CustomUser
 
@@ -8,7 +9,8 @@ class Party(models.Model):
     user = models.ForeignKey(
         CustomUser,
         verbose_name='作成者',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        default=CustomUser,
     )
     title = models.CharField(
         verbose_name='飲み会名',
@@ -42,10 +44,12 @@ class Party(models.Model):
         verbose_name='コメント'
     )
     create_dt = models.DateTimeField(
-        verbose_name='作成日時' #自動的にしたい場合 auto_now_add=True
+        verbose_name='作成日時', #自動的にしたい場合 auto_now_add=True → 採用：default=timezone.now
+        default=timezone.now,
     )
     mod_dt = models.DateTimeField(
-        verbose_name='編集日時' #自動的にしたい場合 auto_now=True
+        verbose_name='編集日時', #自動的にしたい場合 auto_now=True → 採用：default=timezone.now
+        default=timezone.now,    
     )
 
     def __str__(self):
