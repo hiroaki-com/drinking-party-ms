@@ -6,30 +6,28 @@
 <h2 class=mb-2>HOME</h2>
 {% if user.is_authenticated %}
 Welcome ! {{ user.get_username }} さん
-<p class=mt-2><a href="{% url 'account_logout' %}">ログアウト</a></p>
-{% else %}
-<p><a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">ログイン</a></p>
-{% endif %}
 
 <!-- 一覧表示 -->
 <div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
     {% for record in object_list %}
     <div class="col">
       <div class="card-body">
         <p class="card-text">
-          <div class='mb-1' style='text-align: center;'>{{ record.title }}</div>
-          開催日: <br>
-          {{ record.date }} {{ record.time }}<br>
-          店: {{ record.restaurant| truncatechars:30 }}<br>
-          場所: {{ record.address| truncatechars:30 }}<br>
-          URL: {{ record.url| truncatechars:20 }}<br>
-          予約者: {{ record.subscriber }}<br>
-          予算: {{ record.fee }}<br>
-          備考: {{ record.comment| truncatechars:30 }}<br>
-          作成者: {{ record.user }}<br>
-          作成日: {{ record.create_dt }}<br>
-          更新日: {{ record.mod_dt }}<br>
+          <div class='mb-1' style='text-align: left;'>{{ record.title }}</div>
+          開催日時 :<br>
+            <u>{{ record.date }} {{ record.time }}</u> ~<br>
+            <br>
+            店舗 : {{ record.restaurant| truncatechars:30 }}<br>
+            場所 : {{ record.address| truncatechars:30 }}<br>
+            URL : <a href="{{ record.url }}" target="_blank" rel="noopener noreferrer">店舗リンク<i class="fa-solid fa-up-right-from-square fa-xs"></i></a>
+            <div class="aa" style='font-family: Font Awesome 5 Free;'></div>
+            予約者 : {{ record.subscriber }}
+            予算 : {{ record.fee }}円
+            備考 : {{ record.comment| truncatechars:30 }}
+            作成者 : {{ record.user }}
+          </ul>
+          <div style='font-size: 5px'>作成日 : {{ record.create_dt }}</div><div style='font-size: 5px'>更新日 : {{ record.mod_dt }}</div>
         </p>
       </div>
     </div>
@@ -38,4 +36,9 @@ Welcome ! {{ user.get_username }} さん
 </div>
 <!-- 一覧表示 -->
 
+
+<p class=mt-2><a href="{% url 'account_logout' %}">ログアウト</a></p>
+{% else %}
+<p><a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">ログイン</a></p>
+{% endif %}
 {% endblock %}

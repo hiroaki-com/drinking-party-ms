@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'django_bootstrap5',
     'party.apps.PartyConfig',
+    "bootstrap_datepicker_plus",
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,15 @@ ACCOUNT_LOGOUT_ON_GET = True #確認画面無しのログアウト
 SITE_ID = 1
 LOGIN_REDIRECT_URL = 'party:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# django-bootstrap-datepicker-plus の日時表記カスタマイズ
+BOOTSTRAP_DATEPICKER_PLUS = {
+    "options": {
+        "locale": "ja",
+    },
+    "variant_options": {
+        "time": {
+            "format": "HH:mm",
+        },
+    }
+}
