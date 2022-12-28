@@ -1,15 +1,17 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
-
-from .forms import PartyForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+from .forms import PartyForm
+from .models import Party
 
-class IndexView(TemplateView):
+
+class IndexView(ListView):
     template_name = "index.html"
+    queryset = Party.objects.order_by('-create_dt')
 
 
 @method_decorator(login_required, name='dispatch')

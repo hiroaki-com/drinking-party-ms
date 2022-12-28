@@ -3,11 +3,40 @@
 {% block title %}home{% endblock %}
 
 {% block content %}
-<h2 class=mb-5>HOME</h2>
+<h2 class=mb-3>HOME</h2>
 {% if user.is_authenticated %}
 Welcome ! {{ user.get_username }} さん
 <p class=mt-5><a href="{% url 'account_logout' %}">ログアウト</a></p>
 {% else %}
 <p><a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">ログイン</a></p>
 {% endif %}
+
+<!-- 一覧表示 -->
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for record in object_list %}
+    <div class="col">
+      <div class="card-body">
+        <p class="card-text">
+          {{ record.title }}<br>
+          {{ record.user }}<br>
+          {{ record.date }} {{ record.time }}<br>
+          {{ record.restaurant| truncatechars:30 }}<br>
+          {{ record.address| truncatechars:30 }}<br>
+          {{ record.url| truncatechars:30 }}<br>
+          {{ record.subscriber }}<br>
+          {{ record.fee }}<br>
+          {{ record.comment| truncatechars:30 }}<br>
+          作成者{{ record.user }}<br>
+          作成日{{ record.create_dt }}<br>
+          更新日{{ record.mod_dt }}<br>
+          
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<!-- 一覧表示 -->
+
 {% endblock %}
