@@ -3,10 +3,10 @@
 {% block title %}home{% endblock %}
 
 {% block content %}
-<h2 class=mb-3>HOME</h2>
+<h2 class=mb-2>HOME</h2>
 {% if user.is_authenticated %}
 Welcome ! {{ user.get_username }} さん
-<p class=mt-5><a href="{% url 'account_logout' %}">ログアウト</a></p>
+<p class=mt-2><a href="{% url 'account_logout' %}">ログアウト</a></p>
 {% else %}
 <p><a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">ログイン</a></p>
 {% endif %}
@@ -18,18 +18,18 @@ Welcome ! {{ user.get_username }} さん
     <div class="col">
       <div class="card-body">
         <p class="card-text">
-          {{ record.title }}<br>
+          <div class='mb-1' style='text-align: center;'>{{ record.title }}</div>
+          開催日: <br>
           {{ record.date }} {{ record.time }}<br>
           店: {{ record.restaurant| truncatechars:30 }}<br>
           場所: {{ record.address| truncatechars:30 }}<br>
-          URL: {{ record.url| truncatechars:30 }}<br>
+          URL: {{ record.url| truncatechars:20 }}<br>
           予約者: {{ record.subscriber }}<br>
           予算: {{ record.fee }}<br>
           備考: {{ record.comment| truncatechars:30 }}<br>
           作成者: {{ record.user }}<br>
           作成日: {{ record.create_dt }}<br>
           更新日: {{ record.mod_dt }}<br>
-          
         </p>
       </div>
     </div>
