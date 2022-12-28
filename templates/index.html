@@ -19,17 +19,16 @@ Welcome ! {{ user.get_username }} さん
       <div class="card-body">
         <p class="card-text">
           {{ record.title }}<br>
-          {{ record.user }}<br>
           {{ record.date }} {{ record.time }}<br>
-          {{ record.restaurant| truncatechars:30 }}<br>
-          {{ record.address| truncatechars:30 }}<br>
-          {{ record.url| truncatechars:30 }}<br>
-          {{ record.subscriber }}<br>
-          {{ record.fee }}<br>
-          {{ record.comment| truncatechars:30 }}<br>
-          作成者{{ record.user }}<br>
-          作成日{{ record.create_dt }}<br>
-          更新日{{ record.mod_dt }}<br>
+          店: {{ record.restaurant| truncatechars:30 }}<br>
+          場所: {{ record.address| truncatechars:30 }}<br>
+          URL: {{ record.url| truncatechars:30 }}<br>
+          予約者: {{ record.subscriber }}<br>
+          予算: {{ record.fee }}<br>
+          備考: {{ record.comment| truncatechars:30 }}<br>
+          作成者: {{ record.user }}<br>
+          作成日: {{ record.create_dt }}<br>
+          更新日: {{ record.mod_dt }}<br>
           
         </p>
       </div>

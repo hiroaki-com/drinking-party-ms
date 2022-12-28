@@ -11,7 +11,7 @@ from .models import Party
 
 class IndexView(ListView):
     template_name = "index.html"
-    queryset = Party.objects.order_by('-create_dt')
+    queryset = Party.objects.order_by('-date')
 
 
 @method_decorator(login_required, name='dispatch')
