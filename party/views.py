@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
-from .forms import PartyForm
+from .forms import PartyCreateForm
 from .models import Party
 
 
@@ -16,7 +16,7 @@ class IndexView(ListView):
 
 @method_decorator(login_required, name='dispatch')
 class PartyCreateView(CreateView):
-    form_class = PartyForm
+    form_class = PartyCreateForm
     template_name = "party/create_party.html"
     success_url = reverse_lazy('party:index')
 
