@@ -10,7 +10,7 @@ class PartyCreateForm(ModelForm):
         model = Party
         fields = [
         'user', 'title', 'date', 'time', 'restaurant', 'address', 'url',
-        'subscriber', 'fee','comment','create_dt','mod_dt',
+        'subscriber', 'fee','comment',
         ]
         widgets = {
             'date': forms.SelectDateWidget,
