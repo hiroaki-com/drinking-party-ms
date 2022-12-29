@@ -27,5 +27,5 @@ class PartyCreateView(CreateView):
         return super().form_valid(form)
 
 class PartyDetailView(DetailView):
-    template_name = 'party/party_detail.html'
+    template_name = 'party_detail.html'
     model = Party
