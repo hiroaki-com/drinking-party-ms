@@ -27,7 +27,7 @@ Welcome ! {{ user.get_username }} さん
             備考 : {{ record.comment| truncatechars:30 }}
             作成者 : {{ record.user }}
           </ul>
-          <div style='font-size: 5px'>作成日 : {{ record.create_dt }}</div><div style='font-size: 5px'>更新日 : {{ record.mod_dt }}</div>
+          <div class='mt-3' style='font-size: 5px'>作成日 : {{ record.create_dt }}</div><div style='font-size: 5px'>更新日 : {{ record.mod_dt }}</div>
         </p>
       </div>
     </div>
