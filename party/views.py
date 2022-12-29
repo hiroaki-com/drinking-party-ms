@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -25,3 +25,7 @@ class PartyCreateView(CreateView):
         create_data.user = self.request.user
         create_data.save()
         return super().form_valid(form)
+
+class PartyDetailView(DetailView):
+    template_name = 'party_detail.html'
+    model = Party

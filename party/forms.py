@@ -19,7 +19,6 @@ class PartyCreateForm(ModelForm):
         'subscriber', 'fee','comment',
         ]
         widgets = {
-            # 'date': forms.SelectDateWidget, プラグイン導入により不要
             'date': DatePickerInput(),
             'time': TimePickerInput(),
         }
