@@ -26,7 +26,7 @@ Welcome ! {{ user.get_username }} さん
             予算 : {{ record.fee }}円<br>
             備考 : {{ record.comment| truncatechars:30 }}<br>
             作成者 : {{ record.user }}<br>
-          <div class='mt-3' style='font-size: 5px'>作成日 : {{ record.create_dt }}</div><div style='font-size: 5px'>更新日 : {{ record.mod_dt }}</div><br>
+          <div class='mt-3' style='font-size: 8px'>作成日 : {{ record.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ record.mod_dt }}</div><br>
           <div class="detail">
             <a href="{% url 'party:party_detail' record.pk %}">飲み会詳細</a>
           </div>
