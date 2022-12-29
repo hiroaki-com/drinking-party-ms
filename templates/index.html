@@ -22,12 +22,14 @@ Welcome ! {{ user.get_username }} さん
             場所 : {{ record.address| truncatechars:30 }}<br>
             URL : <a href="{{ record.url }}" target="_blank" rel="noopener noreferrer">店舗リンク<i class="fa-solid fa-up-right-from-square fa-xs"></i></a>
             <div class="aa" style='font-family: Font Awesome 5 Free;'></div>
-            予約者 : {{ record.subscriber }}
-            予算 : {{ record.fee }}円
-            備考 : {{ record.comment| truncatechars:30 }}
-            作成者 : {{ record.user }}
-          </ul>
-          <div class='mt-3' style='font-size: 5px'>作成日 : {{ record.create_dt }}</div><div style='font-size: 5px'>更新日 : {{ record.mod_dt }}</div>
+            予約者 : {{ record.subscriber }}<br>
+            予算 : {{ record.fee }}円<br>
+            備考 : {{ record.comment| truncatechars:30 }}<br>
+            作成者 : {{ record.user }}<br>
+          <div class='mt-3' style='font-size: 5px'>作成日 : {{ record.create_dt }}</div><div style='font-size: 5px'>更新日 : {{ record.mod_dt }}</div><br>
+          <div class="detail">
+            <a href="{% url 'party:party_detail' record.pk %}">飲み会詳細</a>
+          </div>
         </p>
       </div>
     </div>
@@ -35,7 +37,6 @@ Welcome ! {{ user.get_username }} さん
   </div>
 </div>
 <!-- 一覧表示 -->
-
 
 <p class=mt-2><a href="{% url 'account_logout' %}">ログアウト</a></p>
 {% else %}

@@ -8,4 +8,5 @@ app_name = 'party'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('create_party/', views.PartyCreateView.as_view(), name='create_party'),
+    path('party_detail/<int:pk>', views.PartyDetailView.as_view(), name='party_detail'),
 ]

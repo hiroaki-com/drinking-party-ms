@@ -10,7 +10,7 @@
       {{ form.media }}
       <form method="POST">
       {% csrf_token %}
-      {{ form.as_p }}
+      {{ form.as_table }}
       <br>
       <button class="primaryAction btn btn-primary btn-sm mb-3" type="submit">作成する</button>
       </form>
