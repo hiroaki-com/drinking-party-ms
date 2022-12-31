@@ -41,7 +41,8 @@ class Party(models.Model):
         verbose_name='会費'
     )
     comment = models.TextField(
-        verbose_name='コメント'
+        verbose_name='コメント',
+        blank=True,
     )
     create_dt = models.DateTimeField(
         verbose_name='作成日時', #自動的にしたい場合 auto_now_add=True → 採用：default=timezone.now
