@@ -55,3 +55,13 @@ class Party(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class JoinForParty(models.Model):
+    target = models.ForeignKey(
+        Party, on_delete=models.CASCADE
+    )
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE
+    )
+    timestamp = models.DateTimeField(default=timezone.now)
