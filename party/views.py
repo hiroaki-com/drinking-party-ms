@@ -42,3 +42,23 @@ class PartyDetailView(DetailView):
             context['is_user_joined_for_party'] = False
         
         return context
+
+
+def join_for_party(request):
+    party_pk = request.POST.get('party_pk')
+    context = {
+        'user':f'{request.user.username}',
+    }
+    party = get_object_or_404(Party, pk=party_pk)
+    join = JoinForParty.objects.filter(target=party, user=request.user)
+
+    if join.exists():
+        join.delete()
+        context['method'] = 'delete'
+    else:
+        join.create(target=party, user=request.user)
+        context['method']='create'
+    
+    context['join_for_party_count'] = party.joinforparty_set.count()
+
+    return JsonResponse(context)
