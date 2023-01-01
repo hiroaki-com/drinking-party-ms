@@ -40,4 +40,42 @@
     </p>
   </div>
 </div>
+
+{% block extrajs %}
+<script type="text/javascript">
+  /* 飲み会への参加 */
+  document.getElementById('ajax-join_for_party').addEventListener('click', e => {
+    e.preventDefault();
+    const url = '{% url "party:join_for_party" %}';
+    fetch(url, {
+      method: 'POST',
+      body: `party_pk={{ party.pk }}`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        'X-CSRFToken': '{{ csrf_token }}',
+      },
+    }).then(response => {
+      return response.json();
+    }).then(response => {
+      // 参加数を書き換える
+      const counter = document.getElementById('join_for_party-count')
+      counter.textContent = response.join_for_party_count
+      const icon = document.getElementById('join_for_party-icon')
+      // 作成した場合はハートを塗る
+      if (response.method == 'create') {
+        icon.classList.remove('far')
+        icon.classList.add('fas')
+        icon.id = 'join_for_party-icon'
+      } else {
+        icon.classList.remove('fas')
+        icon.classList.add('far')
+        icon.id = 'join_for_party-icon'
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+  });
+</script>
+{% endblock %}
+
 {% endblock %}
