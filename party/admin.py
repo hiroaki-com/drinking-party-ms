@@ -10,4 +10,3 @@ from .models import JoinForParty
 
 admin.site.register(Party)
 admin.site.register(JoinForParty)
-

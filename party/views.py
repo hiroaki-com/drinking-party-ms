@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
 from .forms import PartyCreateForm
-from .models import Party
+from .models import Party, JoinForParty
 
 
 class IndexView(ListView):
@@ -29,3 +29,16 @@ class PartyCreateView(CreateView):
 class PartyDetailView(DetailView):
     template_name = 'party/party_detail.html'
     model = Party
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        join_for_party_count = self.object.joinforparty_set.count()
+
+        context['join_for_party_count'] = join_for_party_count
+
+        if self.object.joinforparty_set.filter(user=self.request.user).exists():
+            context['is_user_joined_for_party'] = True
+        else:
+            context['is_user_joined_for_party'] = False
+        
+        return context
