@@ -10,4 +10,5 @@ urlpatterns = [
     path('create_party/', views.PartyCreateView.as_view(), name='create_party'),
     path('party_detail/<int:pk>', views.PartyDetailView.as_view(), name='party_detail'),
     path('join_for_party/', views.join_for_party, name='join_for_party'),
+    path('not_join_for_party/', views.not_join_for_party, name='not_join_for_party'),
 ]

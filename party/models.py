@@ -65,3 +65,13 @@ class JoinForParty(models.Model):
         CustomUser, on_delete=models.CASCADE
     )
     timestamp = models.DateTimeField(default=timezone.now)
+
+
+class NotJoinForParty(models.Model):
+    target = models.ForeignKey(
+        Party, on_delete=models.CASCADE
+    )
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE
+    )
+    timestamp = models.DateTimeField(default=timezone.now)
