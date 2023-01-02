@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import Party
 from .models import JoinForParty
+from .models import NotJoinForParty
 
 # # TODO:管理画面へ反映されない
 # class PartyAdmin(admin.ModelAdmin): 
@@ -10,3 +11,4 @@ from .models import JoinForParty
 
 admin.site.register(Party)
 admin.site.register(JoinForParty)
+admin.site.register(NotJoinForParty)
