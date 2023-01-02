@@ -43,7 +43,7 @@
 
 {% block extrajs %}
 <script type="text/javascript">
-  /* 飲み会への参加 */
+  /* 飲み会への参加ボタン */
   document.getElementById('ajax-join_for_party').addEventListener('click', e => {
     e.preventDefault();
     const url = '{% url "party:join_for_party" %}';
