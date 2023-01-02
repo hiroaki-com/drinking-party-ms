@@ -17,7 +17,7 @@
         予約者 : {{ object.subscriber }}<br>
         予算 : {{ object.fee }}円<br>
         備考 : {{ object.comment }}<br>
-        作成者 : {{ object.user }}<br>
+        作成者 : {{ object.user }}<br>        
       <!-- 参加ボタン -->
       <div>
         {% if is_user_joined_for_party %}
@@ -29,8 +29,10 @@
           <i class="far fa-heart text-danger" id="join_for_party-icon"></i>
         </button>
         {% endif %}
-        <span id="join_for_party-count">{{ join_for_party_count }}</span>
-        <span>件の参加</span>
+        <span>参加する</span>
+        <span>--参加者:</span>
+        <span id="join_for_party-count">{{ join_for_party_count }}</span><span>名</span><br>
+        <span>参加者一覧 : {{ join_for_party_member }}</span>
       </div>
       <!-- 参加ボタン -->
       <!-- 不参加ボタン -->
@@ -44,11 +46,13 @@
           <i class="far fa-heart text-danger" id="not_join_for_party-icon"></i>
         </button>
         {% endif %}
-        <span id="not_join_for_party-count">{{ not_join_for_party_count }}</span>
-        <span>件の不参加</span>
+        <span>不参加</span>
+        <span>--欠席:</span>
+        <span id="not_join_for_party-count">{{ not_join_for_party_count }}</span><span>名</span><br>
+        <span>欠席者一覧 : {{ not_join_for_party_member }}</span>
       </div>
       <!-- 不参加ボタン -->
-      <div class='mt-3' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
+      <div class='mt-1' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
       <div class="detail">
         <a href="{% url 'party:index'%}">HOME</a>
       </div>

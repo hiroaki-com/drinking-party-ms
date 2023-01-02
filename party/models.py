@@ -59,19 +59,29 @@ class Party(models.Model):
 
 class JoinForParty(models.Model):
     target = models.ForeignKey(
-        Party, on_delete=models.CASCADE
+        Party, on_delete=models.CASCADE,
+        verbose_name='飲み会名',
     )
     user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE
+        CustomUser, on_delete=models.CASCADE,
+        verbose_name='参加者',
     )
     timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return str(self.user)
 
 
 class NotJoinForParty(models.Model):
     target = models.ForeignKey(
-        Party, on_delete=models.CASCADE
+        Party, on_delete=models.CASCADE,
+        verbose_name='飲み会名',
     )
     user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE
+        CustomUser, on_delete=models.CASCADE,
+        verbose_name='欠席者',
     )
     timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return str(self.user)
