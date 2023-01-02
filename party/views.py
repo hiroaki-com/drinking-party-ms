@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
 from .forms import PartyCreateForm
-from .models import Party, JoinForParty
+from .models import Party, JoinForParty, NotJoinForParty
 
 
 class IndexView(ListView):
@@ -35,14 +35,20 @@ class PartyDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         join_for_party_count = self.object.joinforparty_set.count()
+        not_join_for_party_count = self.object.notjoinforparty_set.count()
 
         context['join_for_party_count'] = join_for_party_count
-
         if self.object.joinforparty_set.filter(user=self.request.user).exists():
             context['is_user_joined_for_party'] = True
         else:
             context['is_user_joined_for_party'] = False
-        
+
+        context['not_join_for_party_count'] = not_join_for_party_count
+        if self.object.notjoinforparty_set.filter(user=self.request.user).exists():
+            context['is_user_not_joined_for_party'] = True
+        else:
+            context['is_user_not_joined_for_party'] = False
+
         return context
 
 
@@ -62,5 +68,25 @@ def join_for_party(request):
         context['method']='create'
     
     context['join_for_party_count'] = party.joinforparty_set.count()
+
+    return JsonResponse(context)
+
+
+def not_join_for_party(request):
+    party_pk = request.POST.get('party_pk')
+    context = {
+        'user':f'{request.user.username}',
+    }
+    party = get_object_or_404(Party, pk=party_pk)
+    notjoin = NotJoinForParty.objects.filter(target=party, user=request.user)
+
+    if notjoin.exists():
+        notjoin.delete()
+        context['method'] = 'delete'
+    else:
+        notjoin.create(target=party, user=request.user)
+        context['method']='create'
+    
+    context['not_join_for_party_count'] = party.notjoinforparty_set.count()
 
     return JsonResponse(context)
