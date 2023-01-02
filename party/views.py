@@ -36,7 +36,7 @@ class PartyDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         join_for_party_count = self.object.joinforparty_set.count()
         not_join_for_party_count = self.object.notjoinforparty_set.count()
-
+        
         context['join_for_party_count'] = join_for_party_count
         if self.object.joinforparty_set.filter(user=self.request.user).exists():
             context['is_user_joined_for_party'] = True
@@ -48,6 +48,12 @@ class PartyDetailView(DetailView):
             context['is_user_not_joined_for_party'] = True
         else:
             context['is_user_not_joined_for_party'] = False
+
+        join_for_party_member = self.object.joinforparty_set.all()
+        context['join_for_party_member'] = join_for_party_member
+
+        not_join_for_party_member = self.object.notjoinforparty_set.all()
+        context['not_join_for_party_member'] = not_join_for_party_member
 
         return context
 
