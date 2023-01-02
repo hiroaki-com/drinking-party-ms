@@ -31,7 +31,7 @@ class CustomLoginForm(LoginForm):
         #label
         self.fields['login'].label = 'メールアドレス' #email入力用のfieldだが、allauthのfields名は'login'
         self.fields['password'].label = 'パスワード'
-        self.fields['remember'].label = 'stay_login'
+        self.fields['remember'].label = 'ログイン状態を維持する'
 
 #allauthのパスワードリセットのメールフォーム上書き
 class CustomResetPasswordForm(ResetPasswordForm):
