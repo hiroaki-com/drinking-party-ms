@@ -28,11 +28,11 @@
         <button type="button" id="ajax-join_for_party" style="border:none;background:none">
           <i class="far fa-heart text-danger" id="join_for_party-icon"></i>
         </button>
-        {% endif %}
-        <span>参加する</span>
-        <span>--参加者:</span>
-        <span id="join_for_party-count">{{ join_for_party_count }}</span><span>名</span><br>
-        <span>参加者一覧 : {{ join_for_party_member }}</span>
+        {% endif %}<span>参加する</span><br>
+        参加者：<span id="join_for_party-count">{{ join_for_party_count }}<br>
+        {% for join in join_for_party_member %}
+          <div>{{ join.user }}</div>
+        {% endfor %}
       </div>
       <!-- 参加ボタン -->
       <!-- 不参加ボタン -->
@@ -45,11 +45,11 @@
         <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
           <i class="far fa-heart text-danger" id="not_join_for_party-icon"></i>
         </button>
-        {% endif %}
-        <span>不参加</span>
-        <span>--欠席:</span>
-        <span id="not_join_for_party-count">{{ not_join_for_party_count }}</span><span>名</span><br>
-        <span>欠席者一覧 : {{ not_join_for_party_member }}</span>
+        {% endif %}<span>不参加</span><br>
+        欠席者：<span id="not_join_for_party-count">{{ not_join_for_party_count }}<br>
+        {% for not_join in not_join_for_party_member %}
+          <div>{{ not_join.user }}</div>
+        {% endfor %}
       </div>
       <!-- 不参加ボタン -->
       <div class='mt-1' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
