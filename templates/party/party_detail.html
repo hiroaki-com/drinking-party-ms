@@ -19,7 +19,7 @@
         備考 : {{ object.comment }}<br>
         作成者 : {{ object.user }}<br>
       <!-- 参加ボタン -->
-      <div class="card-footer">
+      <div>
         {% if is_user_joined_for_party %}
         <button type="button" id="ajax-join_for_party" style="border:none;background:none">
           <i class="fas fa-heart text-danger" id="join_for_party-icon"></i>
@@ -33,6 +33,21 @@
         <span>件の参加</span>
       </div>
       <!-- 参加ボタン -->
+      <!-- 不参加ボタン -->
+      <div>
+        {% if is_user_not_joined_for_party %}
+        <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
+          <i class="fas fa-heart text-danger" id="not_join_for_party-icon"></i>
+        </button>
+        {% else %}
+        <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
+          <i class="far fa-heart text-danger" id="not_join_for_party-icon"></i>
+        </button>
+        {% endif %}
+        <span id="not_join_for_party-count">{{ not_join_for_party_count }}</span>
+        <span>件の不参加</span>
+      </div>
+      <!-- 不参加ボタン -->
       <div class='mt-3' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
       <div class="detail">
         <a href="{% url 'party:index'%}">HOME</a>
@@ -70,6 +85,36 @@
         icon.classList.remove('fas')
         icon.classList.add('far')
         icon.id = 'join_for_party-icon'
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+  });
+  /* 不参加ボタン */
+  document.getElementById('ajax-not_join_for_party').addEventListener('click', e => {
+    e.preventDefault();
+    const url = '{% url "party:not_join_for_party" %}';
+    fetch(url, {
+      method: 'POST',
+      body: `party_pk={{ party.pk }}`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        'X-CSRFToken': '{{ csrf_token }}',
+      },
+    }).then(response => {
+      return response.json();
+    }).then(response => {
+      const counter = document.getElementById('not_join_for_party-count')
+      counter.textContent = response.not_join_for_party_count
+      const icon = document.getElementById('not_join_for_party-icon')
+      if (response.method == 'create') {
+        icon.classList.remove('far')
+        icon.classList.add('fas')
+        icon.id = 'not_join_for_party-icon'
+      } else {
+        icon.classList.remove('fas')
+        icon.classList.add('far')
+        icon.id = 'not_join_for_party-icon'
       }
     }).catch(error => {
       console.log(error);
