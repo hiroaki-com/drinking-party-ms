@@ -65,6 +65,9 @@ class PartyDetailView(DetailView):
         not_join_for_party_member = self.object.notjoinforparty_set.all()
         context['not_join_for_party_member'] = not_join_for_party_member
 
+        tbd_for_party_member = self.object.tbdforparty_set.all()
+        context['tbd_for_party_member'] = tbd_for_party_member
+
         return context
 
 
@@ -123,6 +126,6 @@ def tbd_for_party(request):
         tbdjoin.create(target=party, user=request.user)
         context['method']='create'
 
-    context['tbd_for_party_count'] = party.tbdjoinforparty_set.count()
+    context['tbd_for_party_count'] = party.tbdforparty_set.count()
 
     return JsonResponse(context)

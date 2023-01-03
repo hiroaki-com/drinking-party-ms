@@ -145,6 +145,36 @@
       console.log(error);
     });
   });
+  /* 未定ボタン */
+  document.getElementById('ajax-tbd_for_party').addEventListener('click', e => {
+    e.preventDefault();
+    const url = '{% url "party:tbd_for_party" %}';
+    fetch(url, {
+      method: 'POST',
+      body: `party_pk={{ party.pk }}`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        'X-CSRFToken': '{{ csrf_token }}',
+      },
+    }).then(response => {
+      return response.json();
+    }).then(response => {
+      const counter = document.getElementById('tbd_for_party-count')
+      counter.textContent = response.tbd_for_party_count
+      const icon = document.getElementById('tbd_for_party-icon')
+      if (response.method == 'create') {
+        icon.classList.remove('far')
+        icon.classList.add('fas')
+        icon.id = 'tbd_for_party-icon'
+      } else {
+        icon.classList.remove('fas')
+        icon.classList.add('far')
+        icon.id = 'tbd_for_party-icon'
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+  });
 </script>
 {% endblock %}
 
