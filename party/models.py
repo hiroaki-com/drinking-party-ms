@@ -11,6 +11,8 @@ class Party(models.Model):
         verbose_name='作成者',
         on_delete=models.CASCADE,
         default=CustomUser,
+        blank=True,
+        null=True,
     )
     title = models.CharField(
         verbose_name='飲み会名',
