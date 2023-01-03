@@ -1,85 +1,96 @@
 {% extends "base.html" %}
 
-{% block title %}Party Detail{% endblock %}    
+{% block title %}Party Detail{% endblock %}
 
 {% block content %}
-<div class="col">
-  <div class="card-body">
-    <p class="card-text">
-      <div class='mb-1' style='text-align: left;'>{{ object.title }}</div>
-      開催日時 :<br>
-        <u>{{ object.date }} {{ object.time }}</u> ~<br>
-        <br>
-        店舗 : {{ object.restaurant }}<br>
-        場所 : {{ object.address }}<br>
-        URL : <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer">{{ object.url }}<i class="fa-solid fa-up-right-from-square fa-xs"></i></a>
-        <div class="aa" style='font-family: Font Awesome 5 Free;'></div>
-        予約者 : {{ object.subscriber }}<br>
-        予算 : {{ object.fee }}円<br>
-        備考 : {{ object.comment }}<br>
-        作成者 : {{ object.user }}<br>
-        <br>  
-      <!-- 参加ボタン -->
-      <div>
-        {% if is_user_joined_for_party %}
-        <button type="button" id="ajax-join_for_party" style="border:none;background:none">
-          <i class="fas fa-heart text-danger" id="join_for_party-icon"></i>
-        </button>
-        {% else %}
-        <button type="button" id="ajax-join_for_party" style="border:none;background:none">
-          <i class="far fa-heart text-danger" id="join_for_party-icon"></i>
-        </button>
-        {% endif %}<span>参加する</span><br>
-        参加者：<span id="join_for_party-count">{{ join_for_party_count }}<br>
-        {% for join in join_for_party_member %}
-          <div>{{ join.user }}</div>
-        {% endfor %}
+<div class="container">
+  <div class='mb-1' style='text-align: left;'>{{ object.title }}</div>
+  開催日時 :<br>
+  <u>{{ object.date }} {{ object.time }}</u> ~<br>
+  <br>
+  店舗 : {{ object.restaurant }}<br>
+  場所 : {{ object.address }}<br>
+  URL : <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer">{{ object.url }}<i class="fa-solid fa-up-right-from-square fa-xs"></i></a>
+  <div class="aa" style='font-family: Font Awesome 5 Free;'></div>
+  予約者 : {{ object.subscriber }}<br>
+  予算 : {{ object.fee }}円<br>
+  備考 : {{ object.comment }}<br>
+  作成者 : {{ object.user }}<br>
+</div>
+<div class="container-fluid mt-2">
+  <div class="row">
+    <!-- 参加ボタン -->
+    <div class="col-2">
+      {% if is_user_joined_for_party %}
+      <button type="button" id="ajax-join_for_party" style="border:none;background:none">
+        <i class="fas fa-heart text-danger" id="join_for_party-icon"></i>
+      </button>
+      {% else %}
+      <button type="button" id="ajax-join_for_party" style="border:none;background:none">
+        <i class="far fa-heart text-primary" id="join_for_party-icon"></i>
+      </button>
+      {% endif %}
+      <div>参加</div>
+      <div class="mb-2">
+        <span id="join_for_party-count">{{ join_for_party_count }}</span><span>名</span>
       </div>
-      <br>
-      <!-- 参加ボタン -->
-      <!-- 不参加ボタン -->
-      <div>
-        {% if is_user_not_joined_for_party %}
-        <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
-          <i class="fas fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
-        </button>
-        {% else %}
-        <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
-          <i class="far fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
-        </button>
-        {% endif %}<span>不参加</span><br>
-        欠席者：<span id="not_join_for_party-count">{{ not_join_for_party_count }}<br>
-        {% for not_join in not_join_for_party_member %}
-          <div>{{ not_join.user }}</div>
-        {% endfor %}
+      {% for join in join_for_party_member %}
+        <div>{{ join.user }}</div>
+      {% endfor %}
+    </div>
+    <!-- /参加ボタン -->
+    <!-- 不参加ボタン -->
+    <div class="col-2">
+      {% if is_user_not_joined_for_party %}
+      <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
+        <i class="fas fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
+      </button>
+      {% else %}
+      <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
+        <i class="far fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
+      </button>
+      {% endif %}
+      <div>不参加</div>
+      <div class="mb-2">
+        <span id="not_join_for_party-count">{{ not_join_for_party_count }}</span><span>名</span>
       </div>
-      <!-- 不参加ボタン -->
-      <br>
-      <!-- 未定ボタン -->
-      <div>
-        {% if is_user_tbd_for_party %}
-        <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
-          <i class="fas fa-user text-dark" id="tbd_for_party-icon"></i>
-        </button>
-        {% else %}
-        <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
-          <i class="far fa-user text-dark" id="tbd_for_party-icon"></i>
-        </button>
-        {% endif %}<span>未定</span><br>
-        未定者：<span id="tbd_for_party-count">{{ tbd_for_party_count }}<br>
-        {% for tbd in tbd_for_party_member %}
-          <div>{{ tbd.user }}</div>
-        {% endfor %}
+      {% for not_join in not_join_for_party_member %}
+        <div>{{ not_join.user }}</div>
+      {% endfor %}
+    </div>
+    <!-- /不参加ボタン -->
+    <!-- 未定ボタン -->
+    <div class="col-2">
+      {% if is_user_tbd_for_party %}
+      <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
+        <i class="fas fa-spinner text-dark" id="tbd_for_party-icon"></i>
+      </button>
+      {% else %}
+      <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
+        <i class="far fa-circle-user text-primary" id="tbd_for_party-icon"></i>
+      </button>
+      {% endif %}
+      <div>未定</div>
+      <div class="mb-2">
+        <span id="tbd_for_party-count">{{ tbd_for_party_count }}</span><span>名</span>
       </div>
-      <br>
-      <!-- 未定ボタン -->
-      <div class='mt-1' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
-      <div class="detail">
-        <a href="{% url 'party:index'%}">HOME</a>
-      </div>
-    </p><i class="fa-regular fa-user"></i>
+      {% for tbd in tbd_for_party_member %}
+        <div>{{ tbd.user }}</div>
+      {% endfor %}
+    </div>
+    <!-- /未定ボタン -->
+    <div class="col-6">
+      <!-- 4つめの空白箱（ボタン達を左に寄せる目的） -->
+    </div>
   </div>
 </div>
+<div class="container mt-3">
+  <div class='mt-1' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
+  <div class="detail">
+    <a href="{% url 'party:index'%}">HOME</a>
+  </div>
+</div>
+
 
 {% block extrajs %}
 <script type="text/javascript">
@@ -103,12 +114,12 @@
       const icon = document.getElementById('join_for_party-icon')
       // 作成した場合はハートを塗る
       if (response.method == 'create') {
-        icon.classList.remove('far')
-        icon.classList.add('fas')
+        icon.classList.remove('far','text-primary')
+        icon.classList.add('fas','text-danger')
         icon.id = 'join_for_party-icon'
       } else {
-        icon.classList.remove('fas')
-        icon.classList.add('far')
+        icon.classList.remove('fas','text-danger')
+        icon.classList.add('far','text-primary')
         icon.id = 'join_for_party-icon'
       }
     }).catch(error => {
@@ -133,12 +144,12 @@
       counter.textContent = response.not_join_for_party_count
       const icon = document.getElementById('not_join_for_party-icon')
       if (response.method == 'create') {
-        icon.classList.remove('far')
-        icon.classList.add('fas')
+        icon.classList.remove('far','text-primary')
+        icon.classList.add('fas','text-primary')
         icon.id = 'not_join_for_party-icon'
       } else {
-        icon.classList.remove('fas')
-        icon.classList.add('far')
+        icon.classList.remove('fas','text-primary')
+        icon.classList.add('far','text-primary')
         icon.id = 'not_join_for_party-icon'
       }
     }).catch(error => {
@@ -162,13 +173,14 @@
       const counter = document.getElementById('tbd_for_party-count')
       counter.textContent = response.tbd_for_party_count
       const icon = document.getElementById('tbd_for_party-icon')
+       /* アイコン自体変更 */
       if (response.method == 'create') {
-        icon.classList.remove('far')
-        icon.classList.add('fas')
+        icon.classList.remove('far','fa-circle-user','text-primary')
+        icon.classList.add('fas','fa-spinner','text-dark')
         icon.id = 'tbd_for_party-icon'
       } else {
-        icon.classList.remove('fas')
-        icon.classList.add('far')
+        icon.classList.remove('fas','fa-spinner','text-dark')
+        icon.classList.add('far','fa-circle-user','text-primary')
         icon.id = 'tbd_for_party-icon'
       }
     }).catch(error => {
