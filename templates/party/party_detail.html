@@ -17,7 +17,8 @@
         予約者 : {{ object.subscriber }}<br>
         予算 : {{ object.fee }}円<br>
         備考 : {{ object.comment }}<br>
-        作成者 : {{ object.user }}<br>        
+        作成者 : {{ object.user }}<br>
+        <br>  
       <!-- 参加ボタン -->
       <div>
         {% if is_user_joined_for_party %}
@@ -34,6 +35,7 @@
           <div>{{ join.user }}</div>
         {% endfor %}
       </div>
+      <br>
       <!-- 参加ボタン -->
       <!-- 不参加ボタン -->
       <div>
@@ -52,6 +54,7 @@
         {% endfor %}
       </div>
       <!-- 不参加ボタン -->
+      <br>
       <div class='mt-1' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
       <div class="detail">
         <a href="{% url 'party:index'%}">HOME</a>
