@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from django import forms
+from django.forms import HiddenInput
 
 from bootstrap_datepicker_plus.widgets import DatePickerInput, TimePickerInput
 
@@ -21,4 +22,5 @@ class PartyCreateForm(ModelForm):
         widgets = {
             'date': DatePickerInput(),
             'time': TimePickerInput(),
+            'user': HiddenInput(),
         }
