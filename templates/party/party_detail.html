@@ -55,6 +55,24 @@
       </div>
       <!-- 不参加ボタン -->
       <br>
+      <!-- 未定ボタン -->
+      <div>
+        {% if is_user_tbd_for_party %}
+        <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
+          <i class="fas fa-heart text-danger" id="tbd_for_party-icon"></i>
+        </button>
+        {% else %}
+        <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
+          <i class="far fa-heart text-danger" id="tbd_for_party-icon"></i>
+        </button>
+        {% endif %}<span>未定</span><br>
+        未定者：<span id="tbd_for_party-count">{{ tbd_for_party_count }}<br>
+        {% for tbd in tbd_for_party_member %}
+          <div>{{ tbd.user }}</div>
+        {% endfor %}
+      </div>
+      <br>
+      <!-- 未定ボタン -->
       <div class='mt-1' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
       <div class="detail">
         <a href="{% url 'party:index'%}">HOME</a>
