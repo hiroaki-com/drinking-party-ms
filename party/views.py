@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
 from .forms import PartyCreateForm
-from .models import Party, JoinForParty, NotJoinForParty
+from .models import Party, JoinForParty, NotJoinForParty, TbdForParty
 
 
 class IndexView(ListView):
@@ -36,24 +36,37 @@ class PartyDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         join_for_party_count = self.object.joinforparty_set.count()
         not_join_for_party_count = self.object.notjoinforparty_set.count()
+        tbd_for_party_count = self.object.tbdforparty_set.count()
         
         context['join_for_party_count'] = join_for_party_count
+        #参加者数
         if self.object.joinforparty_set.filter(user=self.request.user).exists():
             context['is_user_joined_for_party'] = True
         else:
             context['is_user_joined_for_party'] = False
 
         context['not_join_for_party_count'] = not_join_for_party_count
+        #欠席者数
         if self.object.notjoinforparty_set.filter(user=self.request.user).exists():
             context['is_user_not_joined_for_party'] = True
         else:
             context['is_user_not_joined_for_party'] = False
+        
+        context['tbd_for_party_count'] = tbd_for_party_count
+        #未定者数
+        if self.object.tbdforparty_set.filter(user=self.request.user).exists():
+            context['is_user_tbd_for_party'] = True
+        else:
+            context['is_user_tbd_for_party'] = False
 
         join_for_party_member = self.object.joinforparty_set.all()
         context['join_for_party_member'] = join_for_party_member
 
         not_join_for_party_member = self.object.notjoinforparty_set.all()
         context['not_join_for_party_member'] = not_join_for_party_member
+
+        tbd_for_party_member = self.object.tbdforparty_set.all()
+        context['tbd_for_party_member'] = tbd_for_party_member
 
         return context
 
@@ -94,5 +107,25 @@ def not_join_for_party(request):
         context['method']='create'
     
     context['not_join_for_party_count'] = party.notjoinforparty_set.count()
+
+    return JsonResponse(context)
+
+
+def tbd_for_party(request):
+    party_pk = request.POST.get('party_pk')
+    context = {
+        'user':f'{request.user.username}',
+    }
+    party = get_object_or_404(Party, pk=party_pk)
+    tbdjoin = TbdForParty.objects.filter(target=party, user=request.user)
+
+    if tbdjoin.exists():
+        tbdjoin.delete()
+        context['method'] = 'delete'
+    else:
+        tbdjoin.create(target=party, user=request.user)
+        context['method']='create'
+
+    context['tbd_for_party_count'] = party.tbdforparty_set.count()
 
     return JsonResponse(context)

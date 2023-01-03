@@ -85,3 +85,18 @@ class NotJoinForParty(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+
+class TbdForParty(models.Model):
+    target = models.ForeignKey(
+        Party, on_delete=models.CASCADE,
+        verbose_name='飲み会名',
+    )
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE,
+        verbose_name='未定者',
+    )
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return str(self.user)

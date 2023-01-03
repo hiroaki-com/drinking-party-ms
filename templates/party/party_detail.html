@@ -17,7 +17,8 @@
         予約者 : {{ object.subscriber }}<br>
         予算 : {{ object.fee }}円<br>
         備考 : {{ object.comment }}<br>
-        作成者 : {{ object.user }}<br>        
+        作成者 : {{ object.user }}<br>
+        <br>  
       <!-- 参加ボタン -->
       <div>
         {% if is_user_joined_for_party %}
@@ -34,6 +35,7 @@
           <div>{{ join.user }}</div>
         {% endfor %}
       </div>
+      <br>
       <!-- 参加ボタン -->
       <!-- 不参加ボタン -->
       <div>
@@ -52,6 +54,25 @@
         {% endfor %}
       </div>
       <!-- 不参加ボタン -->
+      <br>
+      <!-- 未定ボタン -->
+      <div>
+        {% if is_user_tbd_for_party %}
+        <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
+          <i class="fas fa-heart text-danger" id="tbd_for_party-icon"></i>
+        </button>
+        {% else %}
+        <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
+          <i class="far fa-heart text-danger" id="tbd_for_party-icon"></i>
+        </button>
+        {% endif %}<span>未定</span><br>
+        未定者：<span id="tbd_for_party-count">{{ tbd_for_party_count }}<br>
+        {% for tbd in tbd_for_party_member %}
+          <div>{{ tbd.user }}</div>
+        {% endfor %}
+      </div>
+      <br>
+      <!-- 未定ボタン -->
       <div class='mt-1' style='font-size: 8px'>作成日 : {{ object.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ object.mod_dt }}</div><br>
       <div class="detail">
         <a href="{% url 'party:index'%}">HOME</a>
@@ -119,6 +140,36 @@
         icon.classList.remove('fas')
         icon.classList.add('far')
         icon.id = 'not_join_for_party-icon'
+      }
+    }).catch(error => {
+      console.log(error);
+    });
+  });
+  /* 未定ボタン */
+  document.getElementById('ajax-tbd_for_party').addEventListener('click', e => {
+    e.preventDefault();
+    const url = '{% url "party:tbd_for_party" %}';
+    fetch(url, {
+      method: 'POST',
+      body: `party_pk={{ party.pk }}`,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        'X-CSRFToken': '{{ csrf_token }}',
+      },
+    }).then(response => {
+      return response.json();
+    }).then(response => {
+      const counter = document.getElementById('tbd_for_party-count')
+      counter.textContent = response.tbd_for_party_count
+      const icon = document.getElementById('tbd_for_party-icon')
+      if (response.method == 'create') {
+        icon.classList.remove('far')
+        icon.classList.add('fas')
+        icon.id = 'tbd_for_party-icon'
+      } else {
+        icon.classList.remove('fas')
+        icon.classList.add('far')
+        icon.id = 'tbd_for_party-icon'
       }
     }).catch(error => {
       console.log(error);
