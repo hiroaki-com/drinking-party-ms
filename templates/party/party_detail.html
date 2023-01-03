@@ -41,11 +41,11 @@
       <div>
         {% if is_user_not_joined_for_party %}
         <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
-          <i class="fas fa-heart text-danger" id="not_join_for_party-icon"></i>
+          <i class="fas fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
         </button>
         {% else %}
         <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
-          <i class="far fa-heart text-danger" id="not_join_for_party-icon"></i>
+          <i class="far fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
         </button>
         {% endif %}<span>不参加</span><br>
         欠席者：<span id="not_join_for_party-count">{{ not_join_for_party_count }}<br>
@@ -59,11 +59,11 @@
       <div>
         {% if is_user_tbd_for_party %}
         <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
-          <i class="fas fa-heart text-danger" id="tbd_for_party-icon"></i>
+          <i class="fas fa-user text-dark" id="tbd_for_party-icon"></i>
         </button>
         {% else %}
         <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
-          <i class="far fa-heart text-danger" id="tbd_for_party-icon"></i>
+          <i class="far fa-user text-dark" id="tbd_for_party-icon"></i>
         </button>
         {% endif %}<span>未定</span><br>
         未定者：<span id="tbd_for_party-count">{{ tbd_for_party_count }}<br>
@@ -77,7 +77,7 @@
       <div class="detail">
         <a href="{% url 'party:index'%}">HOME</a>
       </div>
-    </p>
+    </p><i class="fa-regular fa-user"></i>
   </div>
 </div>
 
