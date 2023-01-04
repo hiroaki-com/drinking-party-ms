@@ -43,16 +43,16 @@ class Party(models.Model):
         verbose_name='会費'
     )
     comment = models.TextField(
-        verbose_name='コメント',
+        verbose_name='備考',
         blank=True,
     )
     create_dt = models.DateTimeField(
-        verbose_name='作成日時', #自動的にしたい場合 auto_now_add=True → 採用：default=timezone.now
+        verbose_name='作成日時', #作成日時は固定のため auto_now_add=True → 採用：default=timezone.now
         default=timezone.now,
     )
     mod_dt = models.DateTimeField(
-        verbose_name='編集日時', #自動的にしたい場合 auto_now=True → 採用：default=timezone.now
-        default=timezone.now,    
+        verbose_name='編集日時', #更新日時は可変のため default=timezone.now → 採用：auto_now=True
+        auto_now=True,
     )
 
     def __str__(self):
