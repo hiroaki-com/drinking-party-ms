@@ -3,6 +3,7 @@
 {% block content %}
 <form method="post">{% csrf_token %}
   <p class="text-danger">削除しますと復旧ができません。よろしいですか？</p>
+  <a href="{% url 'party:party_detail' pk=party.pk %} ">キャンセル</a>
   <input type="submit" value="削除する">
 </form>
 {% endblock %}

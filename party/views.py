@@ -1,14 +1,22 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView, DeleteView
+from django.views.generic import (TemplateView,
+                                  ListView,
+                                  DetailView,
+                                  UpdateView,
+                                  DeleteView)
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
 from .forms import PartyCreateForm
-from .models import Party, JoinForParty, NotJoinForParty, TbdForParty
+from .models import (Party, 
+                     JoinForParty,
+                     NotJoinForParty,
+                     TbdForParty)
 
 
 class IndexView(ListView):
@@ -27,6 +35,15 @@ class PartyCreateView(CreateView):
         create_data.user = self.request.user
         create_data.save()
         return super().form_valid(form)
+
+
+class PartyUpdateView(UpdateView):
+    # 使用するtemplateは作成（create_party.html）と同様のHTML
+    form_class = PartyCreateForm
+    model = Party
+    template_name = 'party/create_party.html'
+    def get_success_url(self):
+        return reverse('party:party_detail', kwargs={'pk': self.object.pk})
 
 
 class PartyDeleteView(DeleteView):
