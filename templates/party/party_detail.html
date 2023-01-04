@@ -95,7 +95,7 @@
     <a href="{% url 'party:index'%}">編集</a>
   </div>
   <div class="delete">
-    <a href="{% url 'party:index'%}">削除</a>
+    <a href="{% url 'party:delete_party' party.pk%}">削除</a>
   </div>
   <div class="home">
     <a href="{% url 'party:index'%}">HOME</a>

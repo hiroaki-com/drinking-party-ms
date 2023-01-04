@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, DeleteView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -12,14 +12,14 @@ from .models import Party, JoinForParty, NotJoinForParty, TbdForParty
 
 
 class IndexView(ListView):
-    template_name = "index.html"
+    template_name = 'index.html'
     queryset = Party.objects.order_by('-date')
 
 
 @method_decorator(login_required, name='dispatch')
 class PartyCreateView(CreateView):
     form_class = PartyCreateForm
-    template_name = "party/create_party.html"
+    template_name = 'party/create_party.html'
     success_url = reverse_lazy('party:index')
 
     def form_valid(self, form):
@@ -27,6 +27,13 @@ class PartyCreateView(CreateView):
         create_data.user = self.request.user
         create_data.save()
         return super().form_valid(form)
+
+
+class PartyDeleteView(DeleteView):
+    template_name = 'party/delete_party.html'
+    model = Party
+    success_url = reverse_lazy('party:index')
+
 
 class PartyDetailView(DetailView):
     template_name = 'party/party_detail.html'
