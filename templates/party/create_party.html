@@ -3,7 +3,13 @@
 {% block title %}DRPT CREATE{% endblock %}
     
 {% block content %}
-<br>
+<h3 class=mb-5>
+  {% if not form.instance.pk %}
+  CREATE
+  {% else %}
+  EDIT
+  {% endif %}
+</h3>
 <div class="container">
   <div class="row">
     <div class="col offset-2">
@@ -12,7 +18,13 @@
       {% csrf_token %}
       {{ form.as_table }}
       <br>
-      <button class="primaryAction btn btn-primary btn-sm mb-3" type="submit">作成する</button>
+      <button class="primaryAction btn btn-primary btn-sm mb-3" type="submit">
+      {% if not form.instance.pk %}
+      作成する
+      {% else %}
+      編集する
+      {% endif %}
+      </button>
       </form>
     </div>
   </div>

@@ -88,11 +88,11 @@
 </div>
 <div class="container mt-3">
   <ul style='font-size: 10px; list-style:none; padding-left:0;'>
-    <li>作成日 : {{ object.create_dt }}</li>
-    <li>更新日 : {{ object.mod_dt }}</li>
+    <li>作成日時 : {{ object.create_dt }}</li>
+    <li>最終更新 : {{ object.mod_dt }}</li>
   </ul>  
   <div class="update">
-    <a href="{% url 'party:index'%}">編集</a>
+    <a href="{% url 'party:update_party' party.pk%}">編集</a>
   </div>
   <div class="delete">
     <a href="{% url 'party:delete_party' party.pk%}">削除</a>

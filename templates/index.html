@@ -28,9 +28,8 @@ Welcome ! {{ user.get_username }} さん
             {% comment %} <li>備考 : {{ record.comment| truncatechars:30 }}</li> {% endcomment %}
             <li>作成者 : {{ record.user }}</li>
           </ul>
-          <ul style='font-size: 10px; list-style:none; padding-left:0;'>
-            <li>作成日 : {{ record.create_dt }}</li>
-            {% comment %} <li>更新日 : {{ record.mod_dt }}</li> {% endcomment %}
+          <ul style='font-size: 10px; list-style:none; padding-left:0;'>            
+            <li>最終更新 : {{ record.mod_dt }}</li>
           </ul>  
           <div class="detail">
             <a href="{% url 'party:party_detail' record.pk %}">飲み会詳細</a>
