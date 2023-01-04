@@ -9,24 +9,29 @@ Welcome ! {{ user.get_username }} さん
 
 <!-- 一覧表示 -->
 <div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     {% for record in object_list %}
     <div class="col">
       <div class="card-body">
         <p class="card-text">
           <div class='mb-1' style='text-align: left;'>{{ record.title }}</div>
-          開催日時 :<br>
-            <u>{{ record.date }} {{ record.time }}</u> ~<br>
-            <br>
-            店舗 : {{ record.restaurant| truncatechars:30 }}<br>
-            場所 : {{ record.address| truncatechars:30 }}<br>
-            URL : <a href="{{ record.url }}" target="_blank" rel="noopener noreferrer">店舗リンク<i class="fa-solid fa-up-right-from-square fa-xs"></i></a>
-            <div class="aa" style='font-family: Font Awesome 5 Free;'></div>
-            予約者 : {{ record.subscriber }}<br>
-            予算 : {{ record.fee }}円<br>
-            備考 : {{ record.comment| truncatechars:30 }}<br>
-            作成者 : {{ record.user }}<br>
-          <div class='mt-3' style='font-size: 8px'>作成日 : {{ record.create_dt }}</div><div style='font-size: 8px'>更新日 : {{ record.mod_dt }}</div><br>
+          <ul style="list-style:none; padding-left:0;">
+            <li>開催日時 :</li>
+            <li><u>{{ record.date }} {{ record.time }}</u> ~<br></li>
+          </ul>
+          <ul style="list-style:none; padding-left:0;">
+            <li>店舗 : {{ record.restaurant| truncatechars:30 }}</li>
+            <li>場所 : {{ record.address| truncatechars:30 }}</li>
+            <li>URL : <a href="{{ record.url }}" target="_blank" rel="noopener noreferrer">店舗リンク<i class="fa-solid fa-up-right-from-square fa-xs"></i></a><div class="fa" style='font-family: Font Awesome 5 Free;'></div></li>  
+            <li>予約者 : {{ record.subscriber }}</li>
+            <li>予算 : {{ record.fee }}円</li>
+            {% comment %} <li>備考 : {{ record.comment| truncatechars:30 }}</li> {% endcomment %}
+            <li>作成者 : {{ record.user }}</li>
+          </ul>
+          <ul style='font-size: 10px; list-style:none; padding-left:0;'>
+            <li>作成日 : {{ record.create_dt }}</li>
+            {% comment %} <li>更新日 : {{ record.mod_dt }}</li> {% endcomment %}
+          </ul>  
           <div class="detail">
             <a href="{% url 'party:party_detail' record.pk %}">飲み会詳細</a>
           </div>
