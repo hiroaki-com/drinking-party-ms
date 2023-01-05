@@ -14,11 +14,21 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">開催日時： <u>{{ object.date }} {{ object.time }}</u> ~</li>
       <li class="list-group-item">店舗 : {{ object.restaurant }}</li>
-      <li class="list-group-item">場所 : {{ object.address }}</li>
       <li class="list-group-item">店舗URL : <br>
-        <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer" style="font-size: 10px">
+        <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer" style="font-size: 12px">
           {{ object.url }}<i class="fa-solid fa-up-right-from-square fa-xs"></i>
         </a><div class="font-awsome" style='font-family: Font Awesome 5 Free;'></div>
+      </li>
+      <li class="list-group-item">場所 : {{ object.address }}</li>
+      <li class="list-group-item">
+        <div class="card-body" style="font-size: 14px; height: 302px">
+          <iframe id='map'
+              src='https://www.google.com/maps/embed/v1/place?key=AIzaSyAlRKSydhDj4gJ5sovSQeF6CoqfzdRnAxo&amp;q={{ object.address }}'
+              width='100%'
+              height='100%'
+              frameborder='0'>
+          </iframe>
+        </div>
       </li>
       <li class="list-group-item">予約名 : {{ object.subscriber }}</li>
       <li class="list-group-item">予算 : {{ object.fee }}円</li>
