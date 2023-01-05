@@ -7,42 +7,68 @@
 {% if user.is_authenticated %}
 Welcome ! {{ user.get_username }} さん
 
-<!-- 一覧表示 -->
-<div class="container">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    {% for record in object_list %}
-    <div class="col">
-      <div class="card-body">
-        <p class="card-text">
-          <div class='mb-1' style='text-align: left;'>{{ record.title }}</div>
-          <ul style="list-style:none; padding-left:0;">
-            <li>開催日時 :</li>
-            <li><u>{{ record.date }} {{ record.time }}</u> ~<br></li>
-          </ul>
-          <ul style="list-style:none; padding-left:0;">
-            <li>店舗 : {{ record.restaurant| truncatechars:30 }}</li>
-            <li>場所 : {{ record.address| truncatechars:30 }}</li>
-            <li>URL : <a href="{{ record.url }}" target="_blank" rel="noopener noreferrer">店舗リンク<i class="fa-solid fa-up-right-from-square fa-xs"></i></a><div class="fa" style='font-family: Font Awesome 5 Free;'></div></li>  
-            <li>予約者 : {{ record.subscriber }}</li>
-            <li>予算 : {{ record.fee }}円</li>
-            {% comment %} <li>備考 : {{ record.comment| truncatechars:30 }}</li> {% endcomment %}
-            <li>作成者 : {{ record.user }}</li>
-          </ul>
-          <ul style='font-size: 10px; list-style:none; padding-left:0;'>            
-            <li>最終更新 : {{ record.mod_dt }}</li>
-          </ul>  
-          <div class="detail">
-            <a href="{% url 'party:party_detail' record.pk %}">飲み会詳細</a>
+<!-- 2画面 -->
+<div class="row">
+  <div class="col-6">
+    <!-- 一覧表示 -->
+    <div class="container">
+      {% for record in object_list %}
+      <div class="card mt-4 mx-auto" style="width: 430px;">
+        <div class="card-header" style="font-size: 18px;">
+          {{ record.title }}
+        </div>
+        <div class="card-body" style="font-size: 14px;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">開催日時： <u>{{ record.date }} {{ record.time }}</u> ~</li>
+            <li class="list-group-item">店舗 : {{ record.restaurant| truncatechars:30 }}</li>
+            <li class="list-group-item">場所 : {{ record.address| truncatechars:30 }}</li>
+            <li class="list-group-item">店舗URL :
+              <a href="{{ record.url }}" target="_blank" rel="noopener noreferrer">
+                こちら<i class="fa-solid fa-up-right-from-square fa-xs"></i>
+              </a><div class="font-awesome" style='font-family: Font Awesome 5 Free;'></div>
+            </li>
+            <li class="list-group-item">予約名 : {{ record.subscriber }}</li>
+            <li class="list-group-item">予算 : {{ record.fee }}円</li>
+          </ul>      
+        </div>
+        <div class="card-footer text-muted" style="font-size: 10px;">
+          最終更新 : {{ record.mod_dt }}
+          <div style="text-align: right;">
+            <a href="{% url 'party:party_detail' record.pk %}">詳細／参加可否</a>
           </div>
-        </p>
+        </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+    <!-- 一覧表示 -->
+  <!-- 2画面 -->
   </div>
+  <div class="col-6">
+    <!-- 一覧表示_2 -->
+    <div class="container">
+      {% for record in object_list %}
+      <div class="card mt-4 mx-auto" style="width: 430px;">
+        <div class="card-header" style="font-size: 18px;">
+          {{ record.title }}_{{ record.restaurant| truncatechars:20 }}_地図
+        </div>
+        <div class="card-body" style="font-size: 14px; height: 302px">
+          <p>場所 : {{ record.address| truncatechars:30 }}</p>
+          <iframe id='map'
+              src='https://www.google.com/maps/embed/v1/place?key=AIzaSyAlRKSydhDj4gJ5sovSQeF6CoqfzdRnAxo&amp;q={{ record.address }}'
+              width='100%'
+              height='80%'
+              frameborder='0'>
+          </iframe>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- 一覧表示_2 -->
+  </div>
+  <!-- 2画面 -->
 </div>
-<!-- 一覧表示 -->
 
-<p class=mt-2><a href="{% url 'account_logout' %}">ログアウト</a></p>
+<p class=mt-4><a href="{% url 'account_logout' %}">ログアウト</a></p>
 {% else %}
 <p><a class="btn btn-primary btn-sm" href="{% url 'account_login' %}">ログイン</a></p>
 {% endif %}
