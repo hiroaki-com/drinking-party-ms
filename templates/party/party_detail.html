@@ -6,115 +6,133 @@
 <h3 class="mb-5">
   詳細／参加可否
 </h3>
-<div class="container">
-  <div class="card" style="max-width: 40rem;">
-    <div class="card-header">
-      <div style='text-align: left;'><b>{{ object.title }}</b></div>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">開催日時： <u>{{ object.date }} {{ object.time }}</u> ~</li>
-      <li class="list-group-item">店舗 : {{ object.restaurant }}</li>
-      <li class="list-group-item">店舗URL : <br>
-        <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer" style="font-size: 12px">
-          {{ object.url }}<i class="fa-solid fa-up-right-from-square fa-xs"></i>
-        </a><div class="font-awsome" style='font-family: Font Awesome 5 Free;'></div>
-      </li>
-      <li class="list-group-item">場所 : {{ object.address }}</li>
-      <li class="list-group-item">
-        <div class="card-body" style="font-size: 14px; height: 302px">
-          <iframe id='map'
-              src='https://www.google.com/maps/embed/v1/place?key=AIzaSyAlRKSydhDj4gJ5sovSQeF6CoqfzdRnAxo&amp;q={{ object.address }}'
-              width='100%'
-              height='100%'
-              frameborder='0'>
-          </iframe>
+
+<div class="row mt-3">
+  <div class="col px-0 mx-0">
+  <!-- 左ブロック -->
+    <div class="container">
+      <div class="card" style="max-width: 40rem;">
+        <div class="card-header">
+          <div style='text-align: left;'><b>{{ object.title }}</b></div>
         </div>
-      </li>
-      <li class="list-group-item">予約名 : {{ object.subscriber }}</li>
-      <li class="list-group-item">予算 : {{ object.fee }}円</li>
-      <li class="list-group-item">備考 : {{ object.comment }}</li>
-      <li class="list-group-item">作成者 : {{ object.user }}</li>
-    </ul>  
-    <div class="card-footer">
-      <div style="font-size: 10px;">作成日時 : {{ object.create_dt }}</div>
-      <div style="font-size: 10px;">最終更新 : {{ object.mod_dt }}</div>
-      <div class="d-flex mt-1 justify-content-end">
-        <div class="update">
-          <a href="{% url 'party:update_party' party.pk%}">編集</a>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">開催日時： <u>{{ object.date }} {{ object.time }}</u> ~</li>
+          <li class="list-group-item">店舗 : {{ object.restaurant }}</li>
+          <li class="list-group-item">店舗URL : <br>
+            <a href="{{ object.url }}" target="_blank" rel="noopener noreferrer" style="font-size: 12px">
+              {{ object.url }}<i class="fa-solid fa-up-right-from-square fa-xs"></i>
+            </a><div class="font-awsome" style='font-family: Font Awesome 5 Free;'></div>
+          </li>
+          <li class="list-group-item">場所 : {{ object.address }}</li>
+          <li class="list-group-item">
+            <div class="card-body" style="font-size: 14px; height: 302px">
+              <iframe id='map'
+                  src='https://www.google.com/maps/embed/v1/place?key=AIzaSyAlRKSydhDj4gJ5sovSQeF6CoqfzdRnAxo&amp;q={{ object.address }}'
+                  width='100%'
+                  height='100%'
+                  frameborder='0'>
+              </iframe>
+            </div>
+          </li>
+          <li class="list-group-item">予約名 : {{ object.subscriber }}</li>
+          <li class="list-group-item">予算 : {{ object.fee }}円</li>
+          <li class="list-group-item">備考 : {{ object.comment }}</li>
+          <li class="list-group-item">作成者 : {{ object.user }}</li>
+        </ul>  
+        <div class="card-footer">
+          <div style="font-size: 10px;">作成日時 : {{ object.create_dt }}</div>
+          <div style="font-size: 10px;">最終更新 : {{ object.mod_dt }}</div>
+          <div class="d-flex mt-1 justify-content-end">
+            <div class="update">
+              <a href="{% url 'party:update_party' party.pk%}">編集</a>
+            </div>
+            <div class="delete ms-3 justify-content-end">
+              <a href="{% url 'party:delete_party' party.pk%}">削除</a>
+            </div>    
+          </div>
         </div>
-        <div class="delete ms-3 justify-content-end">
-          <a href="{% url 'party:delete_party' party.pk%}">削除</a>
-        </div>    
       </div>
     </div>
+  <!-- /左ブロック -->
   </div>
-</div>
-<div class="container-fluid mt-2">
-  <div class="row">
-    <!-- 参加ボタン -->
-    <div class="col-2">
-      {% if is_user_joined_for_party %}
-      <button type="button" id="ajax-join_for_party" style="border:none;background:none">
-        <i class="fas fa-heart text-danger" id="join_for_party-icon"></i>
-      </button>
-      {% else %}
-      <button type="button" id="ajax-join_for_party" style="border:none;background:none">
-        <i class="far fa-heart text-primary" id="join_for_party-icon"></i>
-      </button>
-      {% endif %}
-      <div>参加</div>
-      <div class="mb-2">
-        <span id="join_for_party-count">{{ join_for_party_count }}</span><span>名</span>
+  <!-- 右ブロック -->
+  <div class="col px-0">
+    <div class="container">
+      <div class="card" style="max-width: 40rem;">
+        <div class="card-header">
+          出欠確認
+        </div>
+        <div class="row mt-3">
+          <!-- 参加ボタン -->
+          <div class="col-4 text-center min-width: 65px;">
+            {% if is_user_joined_for_party %}
+            <button type="button" id="ajax-join_for_party" style="border:none;background:none">
+              <i class="fas fa-heart text-danger" id="join_for_party-icon"></i>
+            </button>
+            {% else %}
+            <button type="button" id="ajax-join_for_party" style="border:none;background:none">
+              <i class="far fa-heart text-primary" id="join_for_party-icon"></i>
+            </button>
+            {% endif %}
+            <div class="mb-2">参加</div>
+            <div class="mb-4">
+              <span id="join_for_party-count">{{ join_for_party_count }}</span><span>名</span>
+            </div>
+            {% for join in join_for_party_member %}
+            <div class="text-secondary pt-1" style="font-size: 14px;">
+              <p>{{ join.user }}</p>
+            </div>
+            {% endfor %}
+          </div>
+          <!-- /参加ボタン -->
+          <!-- 不参加ボタン -->
+          <div class="col-4 text-center  min-width: 65px;">
+            {% if is_user_not_joined_for_party %}
+            <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
+              <i class="fas fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
+            </button>
+            {% else %}
+            <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
+              <i class="far fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
+            </button>
+            {% endif %}
+            <div class="mb-2">不参加</div>
+            <div class="mb-4">
+              <span id="not_join_for_party-count">{{ not_join_for_party_count }}</span><span>名</span>
+            </div>
+            {% for not_join in not_join_for_party_member %}
+            <div class="text-secondary pt-1" style="font-size: 14px;">
+              <p>{{ not_join.user }}</p>
+            </div>
+            {% endfor %}
+          </div>
+          <!-- /不参加ボタン -->
+          <!-- 未定ボタン -->
+          <div class="col-4 text-center  min-width: 65px;">
+            {% if is_user_tbd_for_party %}
+            <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
+              <i class="fas fa-spinner text-dark" id="tbd_for_party-icon"></i>
+            </button>
+            {% else %}
+            <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
+              <i class="far fa-circle-user text-primary" id="tbd_for_party-icon"></i>
+            </button>
+            {% endif %}
+            <div class="mb-2">未定</div>
+            <div class="mb-4">
+              <span id="tbd_for_party-count">{{ tbd_for_party_count }}</span><span>名</span>
+            </div>
+            {% for tbd in tbd_for_party_member %}
+            <div class="text-secondary pt-1" style="font-size: 14px;">
+              <p>{{ tbd.user }}</p>
+            </div>
+            {% endfor %}
+          </div>
+          <!-- /未定ボタン -->
       </div>
-      {% for join in join_for_party_member %}
-        <div>{{ join.user }}</div>
-      {% endfor %}
     </div>
-    <!-- /参加ボタン -->
-    <!-- 不参加ボタン -->
-    <div class="col-2">
-      {% if is_user_not_joined_for_party %}
-      <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
-        <i class="fas fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
-      </button>
-      {% else %}
-      <button type="button" id="ajax-not_join_for_party" style="border:none;background:none">
-        <i class="far fa-face-sad-tear text-primary" id="not_join_for_party-icon"></i>
-      </button>
-      {% endif %}
-      <div>不参加</div>
-      <div class="mb-2">
-        <span id="not_join_for_party-count">{{ not_join_for_party_count }}</span><span>名</span>
-      </div>
-      {% for not_join in not_join_for_party_member %}
-        <div>{{ not_join.user }}</div>
-      {% endfor %}
-    </div>
-    <!-- /不参加ボタン -->
-    <!-- 未定ボタン -->
-    <div class="col-2">
-      {% if is_user_tbd_for_party %}
-      <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
-        <i class="fas fa-spinner text-dark" id="tbd_for_party-icon"></i>
-      </button>
-      {% else %}
-      <button type="button" id="ajax-tbd_for_party" style="border:none;background:none">
-        <i class="far fa-circle-user text-primary" id="tbd_for_party-icon"></i>
-      </button>
-      {% endif %}
-      <div>未定</div>
-      <div class="mb-2">
-        <span id="tbd_for_party-count">{{ tbd_for_party_count }}</span><span>名</span>
-      </div>
-      {% for tbd in tbd_for_party_member %}
-        <div>{{ tbd.user }}</div>
-      {% endfor %}
-    </div>
-    <!-- /未定ボタン -->
-    <div class="col-6">
-      <!-- 4つめの空白箱（ボタン達を左に寄せる目的） -->
-    </div>
-  </div>
+  </div>  
+  <!-- /右ブロック -->
 </div>
   {% block extrajs %}
   <script type="text/javascript">
