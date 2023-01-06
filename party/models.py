@@ -29,7 +29,7 @@ class Party(models.Model):
         max_length=100,
     )
     address = models.CharField(
-        verbose_name='場所',
+        verbose_name='住所',
         max_length=500,
     )
     url = models.URLField(
