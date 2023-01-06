@@ -43,7 +43,7 @@ Welcome ! {{ user.get_username }} さん
       <div class="card-body" style="font-size: 12px;">
         住所 :<p>{{ record.address| truncatechars:30 }}</p>
         <iframe id='map'
-            src='https://www.google.com/maps/embed/v1/place?key=AIzaSyAlRKSydhDj4gJ5sovSQeF6CoqfzdRnAxo&amp;q={{ record.address }}'
+            src='https://www.google.com/maps/embed/v1/place?key=AIzaSyAlRKSydhDj4gJ5sovSQeF6CoqfzdRnAxo&amp;q={{ record.address }}{{ record.restaurant}}'
             width='100%'
             height='80%'
             frameborder='0'>
