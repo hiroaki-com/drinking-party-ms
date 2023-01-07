@@ -23,7 +23,7 @@ docker-compose up
 docker-compose exec web python manage.py migrate
 ```
 
-fixtureで初期データ投入
+初期データ投入
 ```Docker
 docker-compose exec web python manage.py loaddata party_fixture.json accoutns_fixture.json
 ```
