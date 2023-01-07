@@ -21,7 +21,7 @@ docker-compose run --rm web python3 manage.py migrate
 
 初期データ投入
 ```Docker
-docker-compose run --rm web python3 manage.py loaddata party_fixture.json accoutns_fixture.json
+docker-compose run --rm web python3 manage.py loaddata party_fixture.json accounts_fixture.json
 ```
 
 サーバー起動
