@@ -13,17 +13,18 @@ https://docs.google.com/presentation/d/1TNO_l3lOmP4rnM7k6yDS81A5CJxEUWGOTqLoQoMe
 docker-compose build
 ```
 
-サーバー起動
-```
-docker-compose up
-```
 
 初回マイグレート
 ```Docker
-docker-compose exec web python manage.py migrate
+docker-compose run --rm web python manage.py migrate
 ```
 
 初期データ投入
 ```Docker
-docker-compose exec web python manage.py loaddata party_fixture.json accoutns_fixture.json
+docker-compose run --rm python manage.py loaddata party_fixture.json accoutns_fixture.json
+```
+
+サーバー起動
+```
+docker-compose up
 ```
