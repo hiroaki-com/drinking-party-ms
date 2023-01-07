@@ -1,0 +1,218 @@
+[
+	{
+		"model": "accounts.customuser",
+		"pk": 1,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$v0JgvfjPDMPYhfzClzHp8n$MbaVDepB5pwzszEm7nHMW/xsAkl2m1zMDSkpcKUeBDM=",
+			"last_login": "2023-01-07T13:09:26.675Z",
+			"is_superuser": true,
+			"username": "hiroaki",
+			"first_name": "",
+			"last_name": "",
+			"email": "comukichi@gmail.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-01T12:00:00Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 2,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": "2023-01-03T18:10:29.267Z",
+			"is_superuser": true,
+			"username": "saito",
+			"first_name": "",
+			"last_name": "",
+			"email": "saito@example.com",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2023-01-01T12:00:00Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 3,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "matui",
+			"first_name": "hideki",
+			"last_name": "matui",
+			"email": "matui@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-01T12:00:00Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 8,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": "2023-01-02T18:05:49Z",
+			"is_superuser": true,
+			"username": "tanaka",
+			"first_name": "田中",
+			"last_name": "太郎",
+			"email": "tanaka@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-01T12:00:00Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 9,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "yamada",
+			"first_name": "山田",
+			"last_name": "孝明",
+			"email": "yamada@example.com",
+			"is_staff": false,
+			"is_active": true,
+			"date_joined": "2023-01-01T12:00:00Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 10,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "suzuki",
+			"first_name": "ichiro",
+			"last_name": "suzuki",
+			"email": "suzuki@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-03T05:45:04Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 11,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "kikuchi",
+			"first_name": "kikuchi",
+			"last_name": "kikuchi",
+			"email": "kikuchi@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-03T05:45:04Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 12,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "nakata",
+			"first_name": "hide",
+			"last_name": "nakata",
+			"email": "nakata@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-03T05:45:04Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 12,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "sato",
+			"first_name": "tadao",
+			"last_name": "sato",
+			"email": "sato@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-03T05:45:04Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 13,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "sasaki",
+			"first_name": "daisuke",
+			"last_name": "sasaki",
+			"email": "sasaki@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-03T05:45:04Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 14,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "kudou",
+			"first_name": "san",
+			"last_name": "kudou",
+			"email": "kudou@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-03T05:45:04Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	},
+	{
+		"model": "accounts.customuser",
+		"pk": 15,
+		"fields": {
+			"password": "pbkdf2_sha256$260000$5wbCKdkk6e5DZqOW0Nynbr$Aa7yIUEma2Zt99krmMWZq/hEvsiSi6rZL8isWfVxxf8=",
+			"last_login": null,
+			"is_superuser": true,
+			"username": "kondo",
+			"first_name": "san",
+			"last_name": "kondo",
+			"email": "kondo@example.com",
+			"is_staff": true,
+			"is_active": true,
+			"date_joined": "2023-01-03T05:45:04Z",
+			"groups": [],
+			"user_permissions": []
+		}
+	}
+]
