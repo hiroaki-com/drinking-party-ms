@@ -13,7 +13,6 @@ https://docs.google.com/presentation/d/1TNO_l3lOmP4rnM7k6yDS81A5CJxEUWGOTqLoQoMe
 docker-compose build
 ```
 
-
 初回マイグレート
 ```Docker
 docker-compose run --rm web python3 manage.py migrate
@@ -37,9 +36,11 @@ pass:
 guestpass
 ```
 
+<br>
 以上でアプリがご利用になれます
 <br>
 <br>
+
 ## データベースを作り直したい場合
 <details>
     <summary>手順</summary>
