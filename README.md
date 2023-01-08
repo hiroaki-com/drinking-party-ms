@@ -29,5 +29,10 @@ docker-compose run --rm web python3 manage.py loaddata party_fixture.json accoun
 docker-compose up
 ```
 
-TODO:
- ログイン情報
+ログイン情報
+```
+email:
+guest@example.com
+pass:
+guestpass
+```
