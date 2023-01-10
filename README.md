@@ -8,8 +8,13 @@ https://docs.google.com/presentation/d/1TNO_l3lOmP4rnM7k6yDS81A5CJxEUWGOTqLoQoMe
 <br>
 ## ローカル環境の構築手順
 
-ビルド
+クローン
+```Git
+git clone https://github.com/hiroaki-com/drinking-party-ms.git
 ```
+
+ビルド
+```Docker
 docker-compose build
 ```
 
