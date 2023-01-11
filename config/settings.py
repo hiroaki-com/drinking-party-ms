@@ -173,3 +173,5 @@ ACCOUNT_FORMS = {
     'add_email': 'accounts.forms.CustomAddEmailForm',
     'set_password': 'accounts.forms.CustomSetPasswordForm',
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
