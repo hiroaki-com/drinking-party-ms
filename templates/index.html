@@ -39,7 +39,7 @@ Welcome ! {{ user.get_username }} さん
   </div>  
   <!-- ブロック2 -->
   <div class="col px-0 mx-0">
-    <div class="card" style="height: 100%;">
+    <div class="card" style="height: 100%; min-width: 450px;">
       <div class="card-body" style="font-size: 12px;">
         住所 :<p>{{ record.address| truncatechars:30 }}</p>
         <iframe id='map'

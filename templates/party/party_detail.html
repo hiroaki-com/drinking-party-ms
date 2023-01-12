@@ -48,7 +48,7 @@
             </div>
             <div class="delete ms-3 justify-content-end">
               <a href="{% url 'party:delete_party' party.pk%}">削除</a>
-            </div>    
+            </div>
           </div>
         </div>
       </div>
@@ -137,7 +137,10 @@
           <!-- /未定ボタン -->
       </div>
     </div>
-  </div>  
+    <p class="mt-1" style="font-size: 10px;">※名簿へ反映させるため出欠ボタン押下後は<br>
+      <a style="font-size: 14px;" href="javascript:location.reload();">更新</a>をクリックして下さい
+    </p>
+  </div>
   <!-- /右ブロック -->
 </div>
   {% block extrajs %}
