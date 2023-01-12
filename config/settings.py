@@ -1,22 +1,19 @@
 import os
+import environ
 from pathlib import Path
 from django.core.mail import send_mail
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*'] ## SECURITY WARNING: don't run with [*] turned on in production!
-
+env = environ.Env(DEBUG=(bool, False),)
+environ.Env.read_env('.env')
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
+ 
+DATABASES = {
+    'default': env.db()
+}
 
 # Application definition
 # 自作アプリを追加する場合、上書きの必要なければ、下へ追加する
@@ -180,12 +177,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #開発環境
 # Gmail
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'drinkingpartyms@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 
 subject = "This is MailSubject"
 message = "This is\nMailContent"
 from_email = 'drinkingpartyms@gmail.com'
-recipient_list = [""]
+recipient_list = ["comukichi@gmail.com"]
 send_mail(subject, message, from_email, recipient_list)

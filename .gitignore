@@ -131,3 +131,4 @@ dmypy.json
 .github/
 .DS_Store
 data/
+.env
