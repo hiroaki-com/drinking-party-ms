@@ -6,9 +6,9 @@
 https://docs.google.com/presentation/d/1TNO_l3lOmP4rnM7k6yDS81A5CJxEUWGOTqLoQoMeL20/edit#slide=id.p
 <br>
 <br>
-## ローカル環境の構築手順
+## ローカル環境の構築手順 - Get Started -
 
-クローン
+インストール
 ```Git
 git clone https://github.com/hiroaki-com/drinking-party-ms.git
 ```
@@ -30,7 +30,7 @@ docker-compose run --rm web python3 manage.py loaddata party_fixture.json accoun
 
 サーバー起動
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 ログイン情報
@@ -53,7 +53,7 @@ guestpass
 
 サーバー起動
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 dockerのDBコンテナへ入る<br>
