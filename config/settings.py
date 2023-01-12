@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from django.core.mail import send_mail
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xu*kflhns6ou3_e!x+cbjdhg@rgk#f^eimv#)zu&)kpl2-p1#@'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -174,4 +175,17 @@ ACCOUNT_FORMS = {
     'set_password': 'accounts.forms.CustomSetPasswordForm',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #開発環境
+
+# Gmail
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'drinkingpartyms@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
+
+subject = "This is MailSubject"
+message = "This is\nMailContent"
+from_email = 'drinkingpartyms@gmail.com'
+recipient_list = [""]
+send_mail(subject, message, from_email, recipient_list)
