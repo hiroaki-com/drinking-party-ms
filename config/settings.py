@@ -6,12 +6,6 @@ from django.core.mail import send_mail
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-SECRET_KEY = 'django-insecure-xu*kflhns6ou3_e!x+cbjdhg@rgk#f^eimv#)zu&)kpl2-p1#@'
-
 env = environ.Env(DEBUG=(bool, False),)
 environ.Env.read_env('.env')
 SECRET_KEY = env('SECRET_KEY')
