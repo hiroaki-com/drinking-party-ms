@@ -17,6 +17,9 @@ from .models import (Party,
                      JoinForParty,
                      NotJoinForParty,
                      TbdForParty)
+from django.conf import settings
+from django.core.mail import EmailMessage
+
 
 
 class IndexView(ListView):
@@ -34,6 +37,13 @@ class PartyCreateView(CreateView):
         create_data = form.save()
         create_data.user = self.request.user
         create_data.save()
+        mail = EmailMessage(
+            '通知）飲み会のお知らせ',
+            'メール本文\n',
+            settings.EMAIL_HOST_USER,
+            ['comukichi@gmail.com'],
+        )
+        mail.send()
         return super().form_valid(form)
 
 

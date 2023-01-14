@@ -172,17 +172,17 @@ ACCOUNT_FORMS = {
     'set_password': 'accounts.forms.CustomSetPasswordForm',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #開発環境
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #開発環境
 
 # Gmail
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-subject = "This is MailSubject"
-message = "This is\nMailContent"
-from_email = 'drinkingpartyms@gmail.com'
-recipient_list = ["comukichi@gmail.com"]
-send_mail(subject, message, from_email, recipient_list)
+# subject = "This is MailSubject"
+# message = "This is\nMailContent"
+# from_email = 'drinkingpartyms@gmail.com'
+# recipient_list = ["comukichi@gmail.com"]
+# send_mail(subject, message, from_email, recipient_list)
