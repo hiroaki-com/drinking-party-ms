@@ -39,7 +39,7 @@ class PartyCreateView(CreateView):
         create_data.save()
         mail = EmailMessage(
             '通知）飲み会のお知らせ',
-            'メール本文\n',
+            'メール本文\n飲み会作成をトリガーにして\nDjangoからメール配信\n\n___\n`@hiroaki-com',
             settings.EMAIL_HOST_USER,
             ['comukichi@gmail.com'],
         )
