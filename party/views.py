@@ -38,8 +38,8 @@ class PartyCreateView(CreateView):
         create_data.user = self.request.user
         create_data.save()
         mail = EmailMessage(
-            '通知）飲み会のお知らせ',
-            'メール本文\n飲み会作成をトリガーにして\nDjangoからメール配信\n\n___\n`@hiroaki-com',
+            '作成通知）飲み会のお知らせ',
+            'メール本文\n飲み会[作成]をトリガーにして\nDjangoからメール配信\n\n___\n`@hiroaki-com',
             settings.EMAIL_HOST_USER,
             ['comukichi@gmail.com'],
         )
@@ -55,6 +55,18 @@ class PartyUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('party:party_detail', kwargs={'pk': self.object.pk})
 
+    def form_valid(self, form):
+        create_data = form.save()
+        create_data.user = self.request.user
+        create_data.save()
+        mail = EmailMessage(
+            '変更通知）飲み会のお知らせ',
+            'メール本文\n飲み会[編集]をトリガーにして\nDjangoからメール配信\n\n___\n`@hiroaki-com',
+            settings.EMAIL_HOST_USER,
+            ['comukichi@gmail.com'],
+        )
+        mail.send()
+        return super().form_valid(form)
 
 class PartyDeleteView(DeleteView):
     template_name = 'party/delete_party.html'
