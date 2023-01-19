@@ -19,6 +19,8 @@ from .models import (Party,
                      TbdForParty)
 from django.conf import settings
 from django.core.mail import EmailMessage
+from django.utils.html import strip_tags
+from django.template.loader import render_to_string
 
 
 
@@ -37,15 +39,17 @@ class PartyCreateView(CreateView):
         create_data = form.save()
         create_data.user = self.request.user
         create_data.save()
-        mail = EmailMessage( #TODO:本文をtemplateに分離する
+
+        html_content = render_to_string("mail/create_content.html")
+        text_content = strip_tags(html_content)
+        email = EmailMessage(
             '通知）飲み会のお知らせ',
-            'メール本文\n飲み会[作成]をトリガーにして\nDjangoからメール配信\n\n___\n`@hiroaki-com',
+            text_content,
             settings.EMAIL_HOST_USER,
             ['comukichi@gmail.com'],
         )
-        mail.send()
+        email.send()
         return super().form_valid(form)
-
 
 class PartyUpdateView(UpdateView):
     # 使用するtemplateは作成（create_party.html）と同様のHTML
@@ -56,18 +60,28 @@ class PartyUpdateView(UpdateView):
         return reverse('party:party_detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
-        date = Party.objects.all
         create_data = form.save()
         create_data.user = self.request.user
         create_data.save()
-        mail = EmailMessage( #TODO:本文をtemplateに分離する
-            '変更通知）飲み会のお知らせ',
-            'メール本文\n飲み会[編集]をトリガーにして\nDjangoからメール配信\n{self.date}\n___\n`@hiroaki-com',
+
+        context = {
+          "user": {
+            "last_name": "山田",
+            "first_name": "太郎",
+          },
+          "date": "2021/6/25",
+        }        
+        html_content = render_to_string("mail/update_content.html", context)
+        text_content = strip_tags(html_content)
+        email = EmailMessage(
+            '変更通知）飲み会の変更のお知らせ',
+            text_content,
             settings.EMAIL_HOST_USER,
             ['comukichi@gmail.com'],
         )
-        mail.send()
+        email.send()
         return super().form_valid(form)
+
 
 class PartyDeleteView(DeleteView):
     template_name = 'party/delete_party.html'
