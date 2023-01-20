@@ -42,13 +42,14 @@ class PartyCreateView(CreateView):
 
         last_name = "苗字"
         first_name = "名前"
+        date = "2023/5/1"
         context = {
           "user": {
             "last_name": last_name,
             "first_name": first_name,
           },
-          "date": "2023/5/1",
-        }        
+          "date": date,
+        }
         html_content = render_to_string("mail/create_content.html", context)
         text_content = strip_tags(html_content)
         email = EmailMessage(
@@ -73,13 +74,16 @@ class PartyUpdateView(UpdateView):
         create_data.user = self.request.user
         create_data.save()
 
+        last_name = "苗字"
+        first_name = "名前"
+        date = "2023/5/1"
         context = {
           "user": {
-            "last_name": "山田",
-            "first_name": "太郎",
+            "last_name": last_name,
+            "first_name": first_name,
           },
-          "date": "2023/5/1",
-        }        
+          "date": date,
+        }
         html_content = render_to_string("mail/update_content.html", context)
         text_content = strip_tags(html_content)
         email = EmailMessage(
