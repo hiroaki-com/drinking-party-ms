@@ -1,5 +1,20 @@
 <p>{{user.last_name}} {{user.first_name}}様</p>
+<p>{{user.name}}様</p>
 
 <p>飲み会作成のお知らせです。</p>
 
-<p>飲み会の作成が完了しました。{{ date }}に開催予定です。</p>
+<p>{{user.user}}さんにより{{ title }}が設定されました。</p>
+
+<p>予定</p>
+<span>--</span>
+予定日時:{{ date }}{{ time }}時〜
+飲み会名:{{ title }}
+店舗:{{ restaurant }}
+店舗URL:{{ url }}
+住所: {{ address }}
+予約名:{{ subscriber }}
+予算:{{ fee }}円
+備考:{{ comment }}
+<span>--</span>
+
+<p>{{ remind }}にリマインドメールをお送りします。</p>
