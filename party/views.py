@@ -42,35 +42,34 @@ class PartyCreateView(CreateView):
         create_data = form.save()
         create_data.user = self.request.user
         create_data.save()
-
         last_name = "苗字"
-        first_name = "名前"        
-        pk = self.object.pk
-        user = Party.objects.get(id=pk).user #TODO:cleanup
-        date = Party.objects.get(id=pk).date
-        time = Party.objects.get(id=pk).time
-        title = Party.objects.get(id=pk).title
-        restaurant = Party.objects.get(id=pk).restaurant
-        url = Party.objects.get(id=pk).url
-        address = Party.objects.get(id=pk).address
-        subscriber = Party.objects.get(id=pk).subscriber
-        fee = Party.objects.get(id=pk).fee
-        comment = Party.objects.get(id=pk).comment
+        first_name = "名前"
+        create_user = create_data.user
+        date = self.request.POST["date"]
+        time = self.request.POST["time"]
+        title = self.request.POST["title"]
+        restaurant = self.request.POST["restaurant"]
+        url = self.request.POST["url"]
+        address = self.request.POST["address"]
+        subscriber = self.request.POST["subscriber"]
+        fee = self.request.POST["fee"]
+        comment = self.request.POST["comment"]
         context = {
         "user": {
-            "name": user,
+            "name": create_user, #TODO:update
             "last_name": last_name,
             "first_name": first_name,            
             },
             "date": date,
-            "remind": date + datetime.timedelta(days=-1),
             "time": time,
+            "title": title,
             "restaurant": restaurant,
             "url": url,
             "address": address,
             "subscriber": subscriber,
             "fee": fee,
             "comment": comment,
+            "remind_date": date + str(datetime.timedelta(days=-1)),
         }
         html_content = render_to_string("mail/create_content.html", context)
         text_content = strip_tags(html_content)
@@ -96,7 +95,7 @@ class PartyUpdateView(UpdateView):
         create_data.user = self.request.user
         create_data.save()
 
-        last_name = "苗字"
+        last_name = "苗字" #TODO:update
         first_name = "名前"        
         pk = self.object.pk
         user = Party.objects.get(id=pk).user #TODO:cleanup
@@ -116,14 +115,15 @@ class PartyUpdateView(UpdateView):
             "first_name": first_name,            
             },
             "date": date,
-            "remind": date + datetime.timedelta(days=-1),
             "time": time,
+            "title": title,
             "restaurant": restaurant,
             "url": url,
             "address": address,
             "subscriber": subscriber,
             "fee": fee,
             "comment": comment,
+            "remind_date": date + (datetime.timedelta(days=-1)),
         }
         html_content = render_to_string("mail/update_content.html", context)
         text_content = strip_tags(html_content)

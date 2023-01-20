@@ -1,13 +1,12 @@
 <p>{{user.last_name}} {{user.first_name}}様</p>
-<p>様</p>
 
 <p>飲み会情報の変更のお知らせです。</p>
 
-<p>{{user.user}}さんにより{{ title }}の内容が変更されました。</p>
+<p>{{user.name}}さんにより{{ title }}の内容が変更されました。</p>
 
 <p>予定</p>
 <span>--</span>
-予定日時:{{ date }}{{ time }}時〜
+予定日時:{{ date }} {{ time }}
 飲み会名:{{ title }}
 店舗:{{ restaurant }}
 店舗URL:{{ url }}
@@ -17,4 +16,4 @@
 備考:{{ comment }}
 <span>--</span>
 
-<p>{{ remind }}にリマインドメールをお送りします。</p>
+<p>{{ remind_date }}にリマインドメールをお送りします。</p>
