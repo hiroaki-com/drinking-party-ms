@@ -8,18 +8,21 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.core.mail import EmailMessage
+import datetime
 
 from .forms import PartyCreateForm
 from .models import (Party, 
                      JoinForParty,
                      NotJoinForParty,
                      TbdForParty)
-from django.conf import settings
-from django.core.mail import EmailMessage
-from django.utils.html import strip_tags
+
+
 from django.template.loader import render_to_string
 
 
@@ -41,14 +44,33 @@ class PartyCreateView(CreateView):
         create_data.save()
 
         last_name = "苗字"
-        first_name = "名前"
-        date = "2023/5/1"
+        first_name = "名前"        
+        pk = self.object.pk
+        user = Party.objects.get(id=pk).user #TODO:cleanup
+        date = Party.objects.get(id=pk).date
+        time = Party.objects.get(id=pk).time
+        title = Party.objects.get(id=pk).title
+        restaurant = Party.objects.get(id=pk).restaurant
+        url = Party.objects.get(id=pk).url
+        address = Party.objects.get(id=pk).address
+        subscriber = Party.objects.get(id=pk).subscriber
+        fee = Party.objects.get(id=pk).fee
+        comment = Party.objects.get(id=pk).comment
         context = {
-          "user": {
+        "user": {
+            "name": user,
             "last_name": last_name,
-            "first_name": first_name,
-          },
-          "date": date,
+            "first_name": first_name,            
+            },
+            "date": date,
+            "remind": date + datetime.timedelta(days=-1),
+            "time": time,
+            "restaurant": restaurant,
+            "url": url,
+            "address": address,
+            "subscriber": subscriber,
+            "fee": fee,
+            "comment": comment,
         }
         html_content = render_to_string("mail/create_content.html", context)
         text_content = strip_tags(html_content)
@@ -75,14 +97,33 @@ class PartyUpdateView(UpdateView):
         create_data.save()
 
         last_name = "苗字"
-        first_name = "名前"
-        date = "2023/5/1"
+        first_name = "名前"        
+        pk = self.object.pk
+        user = Party.objects.get(id=pk).user #TODO:cleanup
+        date = Party.objects.get(id=pk).date
+        time = Party.objects.get(id=pk).time
+        title = Party.objects.get(id=pk).title
+        restaurant = Party.objects.get(id=pk).restaurant
+        url = Party.objects.get(id=pk).url
+        address = Party.objects.get(id=pk).address
+        subscriber = Party.objects.get(id=pk).subscriber
+        fee = Party.objects.get(id=pk).fee
+        comment = Party.objects.get(id=pk).comment
         context = {
-          "user": {
+        "user": {
+            "name": user,
             "last_name": last_name,
-            "first_name": first_name,
-          },
-          "date": date,
+            "first_name": first_name,            
+            },
+            "date": date,
+            "remind": date + datetime.timedelta(days=-1),
+            "time": time,
+            "restaurant": restaurant,
+            "url": url,
+            "address": address,
+            "subscriber": subscriber,
+            "fee": fee,
+            "comment": comment,
         }
         html_content = render_to_string("mail/update_content.html", context)
         text_content = strip_tags(html_content)
