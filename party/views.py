@@ -40,10 +40,12 @@ class PartyCreateView(CreateView):
         create_data.user = self.request.user
         create_data.save()
 
+        last_name = "苗字"
+        first_name = "名前"
         context = {
           "user": {
-            "last_name": "山田",
-            "first_name": "太郎",
+            "last_name": last_name,
+            "first_name": first_name,
           },
           "date": "2023/5/1",
         }        
