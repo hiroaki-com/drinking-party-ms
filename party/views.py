@@ -8,17 +8,22 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.utils.html import strip_tags
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.conf import settings
+from django.core.mail import EmailMessage
+import datetime
 
 from .forms import PartyCreateForm
 from .models import (Party, 
                      JoinForParty,
                      NotJoinForParty,
                      TbdForParty)
-from django.conf import settings
-from django.core.mail import EmailMessage
+
+
+from django.template.loader import render_to_string
 
 
 
@@ -37,13 +42,41 @@ class PartyCreateView(CreateView):
         create_data = form.save()
         create_data.user = self.request.user
         create_data.save()
-        mail = EmailMessage(
+
+        create_user = create_data.user
+        date = self.request.POST["date"]
+        time = self.request.POST["time"]
+        title = self.request.POST["title"]
+        restaurant = self.request.POST["restaurant"]
+        url = self.request.POST["url"]
+        address = self.request.POST["address"]
+        subscriber = self.request.POST["subscriber"]
+        fee = self.request.POST["fee"]
+        comment = self.request.POST["comment"]
+        context = {
+        "user": {
+            "create_user": create_user,
+            },
+            "date": date,
+            "time": time,
+            "title": title,
+            "restaurant": restaurant,
+            "url": url,
+            "address": address,
+            "subscriber": subscriber,
+            "fee": fee,
+            "comment": comment,
+            "remind_date": date + str(datetime.timedelta(days=-1)),
+        }
+        html_content = render_to_string("mail/create_content.html", context)
+        text_content = strip_tags(html_content)
+        email = EmailMessage(
             '通知）飲み会のお知らせ',
-            'メール本文\n',
+            text_content,
             settings.EMAIL_HOST_USER,
             ['comukichi@gmail.com'],
         )
-        mail.send()
+        email.send()
         return super().form_valid(form)
 
 
@@ -54,6 +87,50 @@ class PartyUpdateView(UpdateView):
     template_name = 'party/create_party.html'
     def get_success_url(self):
         return reverse('party:party_detail', kwargs={'pk': self.object.pk})
+
+    def form_valid(self, form):
+        create_data = form.save()
+        create_data.user = self.request.user
+        create_data.save()
+
+        mail_to_user = Party.objects.get(id=1).user
+        pk = self.object.pk
+        user = Party.objects.get(id=pk).user #TODO:cleanup
+        date = Party.objects.get(id=pk).date
+        time = Party.objects.get(id=pk).time
+        title = Party.objects.get(id=pk).title
+        restaurant = Party.objects.get(id=pk).restaurant
+        url = Party.objects.get(id=pk).url
+        address = Party.objects.get(id=pk).address
+        subscriber = Party.objects.get(id=pk).subscriber
+        fee = Party.objects.get(id=pk).fee
+        comment = Party.objects.get(id=pk).comment
+        context = {
+        "user": {
+            "update_user": user,
+            "mail_to_user": mail_to_user,
+            },
+            "date": date,
+            "time": time,
+            "title": title,
+            "restaurant": restaurant,
+            "url": url,
+            "address": address,
+            "subscriber": subscriber,
+            "fee": fee,
+            "comment": comment,
+            "remind_date": date + (datetime.timedelta(days=-1)),
+        }
+        html_content = render_to_string("mail/update_content.html", context)
+        text_content = strip_tags(html_content)
+        email = EmailMessage(
+            '変更通知）飲み会の変更のお知らせ',
+            text_content,
+            settings.EMAIL_HOST_USER,
+            ['comukichi@gmail.com'],
+        )
+        email.send()
+        return super().form_valid(form)
 
 
 class PartyDeleteView(DeleteView):
