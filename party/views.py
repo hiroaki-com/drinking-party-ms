@@ -42,8 +42,7 @@ class PartyCreateView(CreateView):
         create_data = form.save()
         create_data.user = self.request.user
         create_data.save()
-        last_name = "苗字"
-        first_name = "名前"
+
         create_user = create_data.user
         date = self.request.POST["date"]
         time = self.request.POST["time"]
@@ -56,9 +55,7 @@ class PartyCreateView(CreateView):
         comment = self.request.POST["comment"]
         context = {
         "user": {
-            "name": create_user, #TODO:update
-            "last_name": last_name,
-            "first_name": first_name,            
+            "create_user": create_user,
             },
             "date": date,
             "time": time,
@@ -82,6 +79,7 @@ class PartyCreateView(CreateView):
         email.send()
         return super().form_valid(form)
 
+
 class PartyUpdateView(UpdateView):
     # 使用するtemplateは作成（create_party.html）と同様のHTML
     form_class = PartyCreateForm
@@ -95,8 +93,7 @@ class PartyUpdateView(UpdateView):
         create_data.user = self.request.user
         create_data.save()
 
-        last_name = "苗字" #TODO:update
-        first_name = "名前"        
+        mail_to_user = Party.objects.get(id=1).user
         pk = self.object.pk
         user = Party.objects.get(id=pk).user #TODO:cleanup
         date = Party.objects.get(id=pk).date
@@ -110,9 +107,8 @@ class PartyUpdateView(UpdateView):
         comment = Party.objects.get(id=pk).comment
         context = {
         "user": {
-            "name": user,
-            "last_name": last_name,
-            "first_name": first_name,            
+            "update_user": user,
+            "mail_to_user": mail_to_user,
             },
             "date": date,
             "time": time,
