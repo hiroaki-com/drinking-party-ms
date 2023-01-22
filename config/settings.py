@@ -172,7 +172,7 @@ ACCOUNT_FORMS = {
     'set_password': 'accounts.forms.CustomSetPasswordForm',
 }
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #開発環境
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #開発環境
 
 # Gmail
 EMAIL_HOST = 'smtp.gmail.com'
