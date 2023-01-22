@@ -44,15 +44,17 @@ class PartyCreateView(CreateView):
         create_data.save()
 
         create_user = create_data.user
-        date = self.request.POST["date"]
-        time = self.request.POST["time"]
-        title = self.request.POST["title"]
-        restaurant = self.request.POST["restaurant"]
-        url = self.request.POST["url"]
-        address = self.request.POST["address"]
-        subscriber = self.request.POST["subscriber"]
-        fee = self.request.POST["fee"]
-        comment = self.request.POST["comment"]
+        date = create_data.date
+        oneday = datetime.timedelta(days=1)
+        remind_date = date - oneday #予定日の前日
+        time = create_data.time
+        title = create_data.title
+        restaurant = create_data.restaurant
+        url = create_data.url
+        address = create_data.address
+        subscriber = create_data.subscriber
+        fee = create_data.fee
+        comment = create_data.comment                
         context = {
         "user": {
             "create_user": create_user,
@@ -66,7 +68,7 @@ class PartyCreateView(CreateView):
             "subscriber": subscriber,
             "fee": fee,
             "comment": comment,
-            "remind_date": date + str(datetime.timedelta(days=-1)),
+            "remind_date": remind_date,
         }
         html_content = render_to_string("mail/create_content.html", context)
         text_content = strip_tags(html_content)
@@ -91,26 +93,25 @@ class PartyUpdateView(UpdateView):
         return reverse('party:party_detail', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
-        create_data = form.save()
-        create_data.user = self.request.user
-        create_data.save()
+        update_data = form.save()
+        update_data.user = self.request.user
+        update_data.save()
 
-        mail_to_user = Party.objects.get(id=1).user
-        pk = self.object.pk
-        user = Party.objects.get(id=pk).user #TODO:cleanup
-        date = Party.objects.get(id=pk).date
-        time = Party.objects.get(id=pk).time
-        title = Party.objects.get(id=pk).title
-        restaurant = Party.objects.get(id=pk).restaurant
-        url = Party.objects.get(id=pk).url
-        address = Party.objects.get(id=pk).address
-        subscriber = Party.objects.get(id=pk).subscriber
-        fee = Party.objects.get(id=pk).fee
-        comment = Party.objects.get(id=pk).comment
+        user = update_data.user
+        date = update_data.date
+        pre_date = (datetime.timedelta(days=1))
+        remind_date = date - pre_date
+        time = update_data.time
+        title = update_data.title
+        restaurant = update_data.restaurant
+        url = update_data.url
+        address = update_data.address
+        subscriber = update_data.subscriber
+        fee = update_data.fee
+        comment = update_data.comment        
         context = {
         "user": {
             "update_user": user,
-            "mail_to_user": mail_to_user,
             },
             "date": date,
             "time": time,
@@ -121,17 +122,17 @@ class PartyUpdateView(UpdateView):
             "subscriber": subscriber,
             "fee": fee,
             "comment": comment,
-            "remind_date": date + (datetime.timedelta(days=-1)),
+            "remind_date": remind_date,
         }
         html_content = render_to_string("mail/update_content.html", context)
         text_content = strip_tags(html_content)
-        send_from = settings.EMAIL_HOST_USER
-        send_to = ['comukichi@gmail.com','komukai.test@gmail.com']
+        from_email = settings.EMAIL_HOST_USER
+        to_email = ['comukichi@gmail.com','komukai.test@gmail.com']
         email = EmailMessage(
             '通知）飲み会のお知らせ',
             text_content,
-            send_from,
-            send_to,
+            from_email,
+            to_email,
         )
         email.send()
         return super().form_valid(form)
