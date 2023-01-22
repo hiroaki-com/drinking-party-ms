@@ -70,11 +70,13 @@ class PartyCreateView(CreateView):
         }
         html_content = render_to_string("mail/create_content.html", context)
         text_content = strip_tags(html_content)
+        send_from = settings.EMAIL_HOST_USER
+        send_to = ['comukichi@gmail.com','komukai.test@gmail.com']
         email = EmailMessage(
             '通知）飲み会のお知らせ',
             text_content,
-            settings.EMAIL_HOST_USER,
-            ['comukichi@gmail.com'],
+            send_from,
+            send_to,
         )
         email.send()
         return super().form_valid(form)
@@ -123,11 +125,13 @@ class PartyUpdateView(UpdateView):
         }
         html_content = render_to_string("mail/update_content.html", context)
         text_content = strip_tags(html_content)
+        send_from = settings.EMAIL_HOST_USER
+        send_to = ['comukichi@gmail.com','komukai.test@gmail.com']
         email = EmailMessage(
-            '変更通知）飲み会の変更のお知らせ',
+            '通知）飲み会のお知らせ',
             text_content,
-            settings.EMAIL_HOST_USER,
-            ['comukichi@gmail.com'],
+            send_from,
+            send_to,
         )
         email.send()
         return super().form_valid(form)
