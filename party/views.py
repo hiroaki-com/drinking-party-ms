@@ -73,7 +73,7 @@ class PartyCreateView(CreateView):
         html_content = render_to_string("mail/create_content.html", context)
         text_content = strip_tags(html_content)
         send_from = settings.EMAIL_HOST_USER
-        send_to = ['comukichi@gmail.com','komukai.test@gmail.com']
+        send_to = ['comukichi@gmail.com','komukai.test@gmail.com','t.tokorozaki@kiyono-co.jp']
         email = EmailMessage(
             '通知）飲み会のお知らせ',
             text_content,
@@ -97,32 +97,21 @@ class PartyUpdateView(UpdateView):
         update_data.user = self.request.user
         update_data.save()
 
-        user = update_data.user
-        date = update_data.date
-        pre_date = (datetime.timedelta(days=1))
-        remind_date = date - pre_date
-        time = update_data.time
-        title = update_data.title
-        restaurant = update_data.restaurant
-        url = update_data.url
-        address = update_data.address
-        subscriber = update_data.subscriber
-        fee = update_data.fee
-        comment = update_data.comment        
+        update_data.one_day = (datetime.timedelta(days=1))
         context = {
         "user": {
-            "update_user": user,
+            "update_user": update_data.user,
             },
-            "date": date,
-            "time": time,
-            "title": title,
-            "restaurant": restaurant,
-            "url": url,
-            "address": address,
-            "subscriber": subscriber,
-            "fee": fee,
-            "comment": comment,
-            "remind_date": remind_date,
+            "date": update_data.date,
+            "time": update_data.time,
+            "title": update_data.title,
+            "restaurant": update_data.restaurant,
+            "url": update_data.url,
+            "address": update_data.address,
+            "subscriber": update_data.subscriber,
+            "fee": update_data.fee,
+            "comment": update_data.comment,
+            "remind_date": update_data.date - update_data.one_day, #予約日の前日
         }
         html_content = render_to_string("mail/update_content.html", context)
         text_content = strip_tags(html_content)
