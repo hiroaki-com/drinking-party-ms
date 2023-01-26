@@ -27,14 +27,26 @@
 <body style="background-color:#ece8e0;">
 
 {# --- header --- #}
-<nav class="navbar navbar-custom fixed-top mb-2 bg-warning">
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+    <span class="fs-4">Simple header</span>    </a>
+  <ul class="nav nav-pills">
+    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+    <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+  </ul>
+</header>
+{% comment %} <nav class="navbar navbar-custom fixed-top mb-2 bg-warning">
   <div class="container">
-      <a class="navbar-brand" href="{% url 'party:index' %}">DRPT</a>
+      <a class="navbar-brand" href="{% url 'party:index' %}"><b>DRPT</b></a>
   </div>
   <div class="container">
       <a class="navbar-brand" href="{% url 'party:create_party' %}">CREATE</a>
   </div>
-</nav>
+</nav> {% endcomment %}
 
 {# --- js --- #}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
