@@ -24,17 +24,25 @@
   {% block extra_css %}{% endblock %}
 </head>
 
-<body style="background-color:#ece8e0;">
+<body class="pt-0" style="background-color:#ece8e0;">
 
 {# --- header --- #}
-<nav class="navbar navbar-custom fixed-top mb-2 bg-warning">
-  <div class="container">
-      <a class="navbar-brand" href="{% url 'party:index' %}">DRPT</a>
-  </div>
-  <div class="container">
-      <a class="navbar-brand" href="{% url 'party:create_party' %}">CREATE</a>
-  </div>
-</nav>
+<div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-warningz">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <span class="fs-4">DRPT</span>
+    </a>
+    {% if user.is_authenticated %}
+    <ul class="nav nav-pills">
+      <li class="nav-item invisible"><a href="#" class="nav-link active" aria-current="page">invisible</a></li>
+      <li class="nav-item invisible"><a href="#" class="nav-link">Pricing</a></li>
+      <li class="nav-item"><a href="{% url 'party:create_party' %}" class="nav-link">Create</a></li>
+      <li class="nav-item"><a href="{% url 'account_logout' %}" class="nav-link">Logout</a></li>
+      <li class="nav-item invisible"><a href="#" class="nav-link">invisible</a></li>
+      {% endif %}
+    </ul>
+  </header>
+</div>
 
 {# --- js --- #}
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
